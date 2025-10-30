@@ -1,0 +1,11 @@
+# robots.txt for BouwMeesters Amsterdam BV
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://bouwmeesters-amsterdam.nl/sitemap-index.xml

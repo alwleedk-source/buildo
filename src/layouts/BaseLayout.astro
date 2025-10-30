@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  lang?: 'nl' | 'en';
+  canonical?: string;
+  noindex?: boolean;
+  structuredData?: object;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  lang = 'nl',
+  canonical,
+  noindex = false,
+  structuredData,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://bouwmeesters-amsterdam.nl';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const canonicalUrl = canonical || currentUrl;
+const ogImage = new URL(image, siteUrl).toString();
+
+// Default structured data for organization
+const defaultStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'BouwMeesters Amsterdam BV',
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.png`,
+  description: 'Professionele bouwoplossingen in Amsterdam',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Bouwmeesterstraat 123',
+    addressLocality: 'Amsterdam',
+    postalCode: '1017 AD',
+    addressCountry: 'NL',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+31-20-123-4567',
+    contactType: 'customer service',
+    areaServed: 'NL',
+    availableLanguage: ['nl', 'en'],
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/bouwmeesters-amsterdam',
+    'https://www.facebook.com/bouwmeesters-amsterdam',
+  ],
+};
+
+const finalStructuredData = structuredData || defaultStructuredData;
+---
+
+<!doctype html>
+<html lang={lang} dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'nl' ? 'nl_NL' : 'en_US'} />
+    <meta property="og:site_name" content="BouwMeesters Amsterdam BV" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={currentUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Alternate Languages -->
+    <link rel="alternate" hreflang="nl" href={`${siteUrl}${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${Astro.url.pathname}`} />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0f766e" />
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>

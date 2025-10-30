@@ -1,16 +1,195 @@
 ---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { generateLocalBusinessSchema } from '@lib/seo';
 
+const title = 'Bouwen aan de Toekomst - BouwMeesters Amsterdam BV';
+const description = 'Professionele bouwoplossingen met duurzame innovatie en uitzonderlijke kwaliteitsnormen. Meer dan 500 voltooide projecten in Amsterdam en omgeving.';
+
+const structuredData = generateLocalBusinessSchema();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+  title={title} 
+  description={description}
+  structuredData={structuredData}
+  lang="nl"
+>
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen">
+    <div class="absolute inset-0 bg-gradient-to-br from-teal-700 to-teal-900">
+      <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+    
+    <div class="relative z-10 container mx-auto px-4 py-32 flex flex-col items-center justify-center min-h-screen text-center text-white">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+        Bouwen aan de Toekomst
+      </h1>
+      <p class="text-xl md:text-2xl mb-12 max-w-3xl animate-fade-in-delay">
+        Professionele bouwoplossingen met duurzame innovatie en uitzonderlijke kwaliteitsnormen
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-delay-2">
+        <a 
+          href="#projects" 
+          class="px-8 py-4 bg-teal-600 hover:bg-teal-700 rounded-lg font-semibold transition-colors"
+        >
+          Bekijk Onze Projecten
+        </a>
+        <a 
+          href="#contact" 
+          class="px-8 py-4 bg-white text-teal-900 hover:bg-gray-100 rounded-lg font-semibold transition-colors"
+        >
+          Contact Opnemen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section id="statistics" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Onze Prestaties</h2>
+        <p class="text-xl text-gray-600">
+          Ontdek de cijfers achter onze toewijding aan excellentie en duurzaamheid
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+          <div class="text-5xl font-bold text-blue-600 mb-2">500+</div>
+          <div class="text-gray-700 font-medium">Voltooide Projecten</div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+          <div class="text-5xl font-bold text-green-600 mb-2">25%</div>
+          <div class="text-gray-700 font-medium">CO2 Reductie</div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+          <div class="text-5xl font-bold text-orange-600 mb-2">100%</div>
+          <div class="text-gray-700 font-medium">Duurzame Materialen</div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+          <div class="text-5xl font-bold text-purple-600 mb-2">50+</div>
+          <div class="text-gray-700 font-medium">Lokale Partners</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">Over Ons Bedrijf</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Een verhaal van vakmanschap en excellentie in de bouwwereld. Bij BouwMeesters Amsterdam 
+            staan kwaliteit, innovatie en duurzaamheid centraal in alles wat we doen.
+          </p>
+          
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 mb-2">Kwaliteitsgarantie</h3>
+                <p class="text-gray-600">Rigoureuze kwaliteitscontrole in elke projectfase</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-gray-900 mb-2">Duurzame Praktijken</h3>
+                <p class="text-gray-600">Milieuverantwoordelijkheid in al onze activiteiten</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative h-96 rounded-xl overflow-hidden shadow-2xl bg-gray-200">
+          <!-- Placeholder for image -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-900 mb-6">Neem contact op</h2>
+        <p class="text-xl text-gray-600 mb-12">
+          Klaar om uw volgende bouwproject te starten? Neem vandaag nog contact met ons op.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Phone</h3>
+            <p class="text-gray-600">+31 20 123 4567</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Email</h3>
+            <p class="text-gray-600">info@buildit-professional.com</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2">Address</h3>
+            <p class="text-gray-600">Bouwmeesterstraat 123<br/>1017 AD Amsterdam</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+  
+  .animate-fade-in-delay {
+    animation: fade-in 0.8s ease-out 0.2s both;
+  }
+  
+  .animate-fade-in-delay-2 {
+    animation: fade-in 0.8s ease-out 0.4s both;
+  }
+</style>
