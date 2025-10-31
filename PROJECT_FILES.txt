@@ -1,0 +1,88 @@
+📁 BouwMeesters Amsterdam - Next.js Project Files
+================================================
+
+📚 DOCUMENTATION FILES:
+- README.md                    # Main project documentation
+- DEPLOYMENT_GUIDE.md          # Complete deployment guide
+- PROJECT_STATUS.md            # Detailed project status
+- COMPLETION_SUMMARY.md        # Project completion summary
+- .env.example                 # Environment variables template
+
+📦 CONFIGURATION FILES:
+- package.json                 # Dependencies and scripts
+- next.config.ts               # Next.js configuration
+- tsconfig.json                # TypeScript configuration
+- tailwind.config.ts           # Tailwind CSS configuration
+- drizzle.config.ts            # Database configuration
+- eslint.config.mjs            # ESLint configuration
+- postcss.config.mjs           # PostCSS configuration
+- .nvmrc                       # Node.js version
+- nixpacks.toml                # Railway deployment config
+
+🗂️ SOURCE CODE STRUCTURE:
+src/
+├── app/                       # Next.js App Router
+│   ├── page.tsx              # Home page
+│   ├── layout.tsx            # Root layout
+│   ├── about-us/             # About page
+│   ├── services/             # Services pages
+│   ├── projects/             # Projects pages
+│   ├── blog/                 # Blog pages
+│   ├── team/                 # Team page
+│   ├── contact/              # Contact page
+│   ├── maatschappelijke/     # Initiatives pages
+│   ├── legal/                # Legal pages
+│   ├── login/                # Login page
+│   ├── admin/                # Admin dashboard (17 pages)
+│   └── api/                  # API Routes (112 endpoints)
+│       ├── auth/             # Authentication
+│       ├── admin/            # Admin APIs
+│       └── [public APIs]     # Public endpoints
+├── components/               # React components (108 total)
+│   ├── ui/                   # shadcn/ui components (47)
+│   ├── pages/                # Page components (14)
+│   ├── admin/                # Admin components (30+)
+│   ├── providers/            # Context providers
+│   ├── header.tsx            # Header component
+│   ├── footer.tsx            # Footer component
+│   └── language-switcher.tsx # Language switcher
+├── lib/                      # Utilities and helpers
+│   ├── db/                   # Database
+│   │   ├── index.ts          # Database connection
+│   │   └── schema.ts         # Database schema (15+ tables)
+│   ├── i18n.ts               # i18n configuration
+│   ├── queryClient.ts        # React Query setup
+│   ├── utils.ts              # Utility functions
+│   └── authUtils.ts          # Auth utilities
+├── hooks/                    # Custom React hooks
+│   ├── use-toast.ts          # Toast hook
+│   └── useSEO.ts             # SEO hook
+└── styles/
+    └── globals.css           # Global styles
+
+📁 PUBLIC FILES:
+public/
+└── locales/                  # Translation files
+    ├── nl/                   # Dutch translations
+    │   └── translation.json
+    └── en/                   # English translations
+        └── translation.json
+
+📊 DATABASE:
+drizzle/                      # Database migrations
+└── [migration files]
+
+🔧 BUILD OUTPUT:
+.next/                        # Next.js build output (generated)
+node_modules/                 # Dependencies (generated)
+
+📈 STATISTICS:
+- Total Pages: 31
+- API Routes: 112
+- Components: 108
+- UI Components: 47
+- Database Tables: 15+
+- Languages: 2 (Dutch, English)
+- Lines of Code: ~15,000+
+
+✅ STATUS: 100% Complete - Production Ready

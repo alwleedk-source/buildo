@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "team": "Team",
+    "login": "Login",
+    "logout": "Logout",
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "contactUs": "Contact us",
+    "viewAll": "View all",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Successful",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "hero": {
+    "title": "Welcome to BouwMeesters Amsterdam",
+    "subtitle": "Your partner in professional construction solutions",
+    "cta": "Contact us"
+  },
+  "footer": {
+    "copyright": "© 2024 BouwMeesters Amsterdam BV. All rights reserved.",
+    "followUs": "Follow us",
+    "quickLinks": "Quick links",
+    "contactInfo": "Contact information"
+  }
+}

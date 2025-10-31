@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "Over Ons",
+    "services": "Diensten",
+    "projects": "Projecten",
+    "blog": "Blog",
+    "contact": "Contact",
+    "team": "Team",
+    "login": "Inloggen",
+    "logout": "Uitloggen",
+    "readMore": "Lees meer",
+    "learnMore": "Meer informatie",
+    "getStarted": "Aan de slag",
+    "contactUs": "Neem contact op",
+    "viewAll": "Bekijk alles",
+    "loading": "Laden...",
+    "error": "Er is een fout opgetreden",
+    "success": "Succesvol",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "add": "Toevoegen",
+    "search": "Zoeken",
+    "filter": "Filteren",
+    "sort": "Sorteren",
+    "previous": "Vorige",
+    "next": "Volgende"
+  },
+  "hero": {
+    "title": "Welkom bij BouwMeesters Amsterdam",
+    "subtitle": "Uw partner in professionele bouwoplossingen",
+    "cta": "Neem contact op"
+  },
+  "footer": {
+    "copyright": "© 2024 BouwMeesters Amsterdam BV. Alle rechten voorbehouden.",
+    "followUs": "Volg ons",
+    "quickLinks": "Snelle links",
+    "contactInfo": "Contactinformatie"
+  }
+}

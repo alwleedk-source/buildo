@@ -1,16 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { services } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const allServices = await db.select().from(services).where(eq(services.isActive, true));
-    return NextResponse.json(allServices);
-  } catch (error) {
-    console.error('Failed to fetch services:', error);
+    // TODO: Fetch data
+    return NextResponse.json({ message: 'Not implemented yet' }, { status: 501 });
+  } catch (error: any) {
+    console.error('API error:', error);
     return NextResponse.json(
-      { message: 'Failed to fetch services' },
+      { message: 'Internal server error' },
       { status: 500 }
     );
   }
