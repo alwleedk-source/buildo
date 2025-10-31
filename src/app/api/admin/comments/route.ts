@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { requireAuth } from '@/lib/auth';
+// import { requireAuth } from '@/lib/auth'; // Disabled for now
 
 export async function GET(request: NextRequest) {
   try {
-    await requireAuth();
+    // await requireAuth(); // Disabled for now
 
     // TODO: Fetch data
     return NextResponse.json({ data: [], success: true }, { status: 200 });

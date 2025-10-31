@@ -10,7 +10,7 @@ export default function EmailTemplatesAdmin() {
         <CRUDTable
           title="Email Templates"
           description="Manage email templates for automated communications"
-          apiEndpoint="/api/admin/email-templates"
+          apiEndpoint="/api/admin/email/templates"
           fields={[
             { name: 'name', label: 'Template Name', type: 'text', required: true },
             { name: 'subject', label: 'Email Subject', type: 'text', required: true },
