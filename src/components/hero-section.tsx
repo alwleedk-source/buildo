@@ -9,7 +9,12 @@ import type { HeroContent } from '@/lib/db/schema';
 
 export function HeroSection() {
   const { data: heroContent, isLoading } = useQuery<HeroContent>({
-    queryKey: ['/api/hero'],
+    queryKey: ['/api/hero-content'],
+    queryFn: async () => {
+      const res = await fetch('/api/hero-content');
+      if (!res.ok) throw new Error('Failed to fetch hero content');
+      return res.json();
+    },
   });
   const { i18n } = useTranslation();
 

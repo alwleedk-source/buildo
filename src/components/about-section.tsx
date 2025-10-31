@@ -10,11 +10,21 @@ import type { AboutContent, AboutUsPage } from '@/lib/db/schema';
 export function AboutSection() {
   const { data: aboutContent, isLoading } = useQuery<AboutContent>({
     queryKey: ['/api/about'],
+    queryFn: async () => {
+      const res = await fetch('/api/about');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
   
   // Check if About Us page is active to show/hide "Meer Over Ons" button
   const { data: aboutUsPage } = useQuery<AboutUsPage>({
     queryKey: ['/api/about-us'],
+    queryFn: async () => {
+      const res = await fetch('/api/about-us');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
   
   const { i18n } = useTranslation();

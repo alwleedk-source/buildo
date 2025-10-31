@@ -18,16 +18,31 @@ export function Header() {
   // Get section settings for dynamic navigation
   const { data: sectionSettings = [], isLoading } = useQuery<SectionSetting[]>({
     queryKey: ['/api/section-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/section-settings');
+      if (!res.ok) throw new Error('Failed to fetch section settings');
+      return res.json();
+    },
   });
 
   // Get hero content to check headerOverlay setting
   const { data: heroContent } = useQuery<HeroContent>({
     queryKey: ['/api/hero'],
+    queryFn: async () => {
+      const res = await fetch('/api/hero');
+      if (!res.ok) throw new Error('Failed to fetch hero');
+      return res.json();
+    },
   });
 
   // Get site settings for logo and site name
   const { data: siteSettings = [], isLoading: siteSettingsLoading } = useQuery<SiteSetting[]>({
     queryKey: ['/api/site-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/site-settings');
+      if (!res.ok) throw new Error('Failed to fetch site settings');
+      return res.json();
+    },
   });
 
   // Helper function to get site setting value

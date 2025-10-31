@@ -77,6 +77,11 @@ export function EmailTemplates({}: EmailTemplatesProps) {
 
   const { data: templates = [], isLoading } = useQuery({
     queryKey: ['/api/admin/email/templates'],
+    queryFn: async () => {
+      const res = await fetch('/api/admin/email/templates', { credentials: 'include' });
+      if (!res.ok) throw new Error('Failed to fetch templates');
+      return res.json();
+    },
   });
 
   const createMutation = useMutation({

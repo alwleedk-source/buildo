@@ -331,10 +331,20 @@ export function StatisticsSection() {
   
   const { data: statistics = [], isLoading: statisticsLoading } = useQuery<Statistic[]>({
     queryKey: ['/api/statistics'],
+    queryFn: async () => {
+      const res = await fetch('/api/statistics');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
 
   const { data: settings, isLoading: settingsLoading } = useQuery<StatisticsSetting | null>({
     queryKey: ['/api/statistics-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/statistics-settings');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
 
   const isLoading = statisticsLoading || settingsLoading;

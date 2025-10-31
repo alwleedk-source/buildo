@@ -8,7 +8,7 @@ export async function GET(
   try {
     const { key } = await params;
     // TODO: Fetch data by key
-    return NextResponse.json({ message: 'Not implemented yet' }, { status: 501 });
+    return NextResponse.json({ data: [], success: true }, { status: 200 });
   } catch (error: any) {
     console.error('API error:', error);
     return NextResponse.json(

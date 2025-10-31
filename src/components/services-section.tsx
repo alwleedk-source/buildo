@@ -11,6 +11,11 @@ export function ServicesSection() {
   const { t } = useTranslation();
   const { data: services = [], isLoading } = useQuery<Service[]>({
     queryKey: ['/api/services'],
+    queryFn: async () => {
+      const res = await fetch('/api/services');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
 
   const getIcon = (iconName?: string) => {

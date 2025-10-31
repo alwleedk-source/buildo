@@ -37,10 +37,20 @@ export function BlogSection() {
   
   const { data: blogData, isLoading } = useQuery<{articles: BlogArticle[]}>({
     queryKey: ['/api/blog'],
+    queryFn: async () => {
+      const res = await fetch('/api/blog');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
   
   const { data: settings, isLoading: settingsLoading } = useQuery<BlogSettingsResponse>({
     queryKey: ['/api/blog-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/blog-settings');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
   
   const articles = blogData?.articles || [];

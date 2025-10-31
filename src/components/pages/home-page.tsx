@@ -20,6 +20,11 @@ import { SectionSetting } from "@/lib/db/schema";
 export function HomePage() {
   const { data: sectionSettings = [], isLoading } = useQuery<SectionSetting[]>({
     queryKey: ['/api/section-settings'],
+    queryFn: async () => {
+      const res = await fetch('/api/section-settings');
+      if (!res.ok) throw new Error('Failed to fetch section settings');
+      return res.json();
+    },
   });
 
   // Map section keys to their components

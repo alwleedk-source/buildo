@@ -35,6 +35,11 @@ export function ProjectsSection() {
   
   const { data: projects = [], isLoading } = useQuery<Project[]>({
     queryKey: ['/api/projects'],
+    queryFn: async () => {
+      const res = await fetch('/api/projects');
+      if (!res.ok) throw new Error('Failed to fetch');
+      return res.json();
+    },
   });
 
   // Generate dynamic filters from actual project data
