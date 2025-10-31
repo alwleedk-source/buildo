@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { services, blogArticles, teamMembers, partners, testimonials } from '@/lib/db/schema';
+import { services, blogArticles, teamMembers, partners, testimonials, projects } from '@/lib/db/schema';
 
 export async function POST() {
   try {
@@ -163,6 +163,90 @@ export async function POST() {
       }
     ]);
 
+    // Seed Projects
+    await db.insert(projects).values([
+      {
+        titleNl: 'Moderne Kantoorruimte Amsterdam',
+        titleEn: 'Modern Office Space Amsterdam',
+        descriptionNl: 'Complete nieuwbouw van een modern kantoorgebouw in Amsterdam Centrum met duurzame materialen.',
+        descriptionEn: 'Complete new construction of a modern office building in Amsterdam Center with sustainable materials.',
+        category: 'nieuwbouw',
+        location: 'Amsterdam',
+        completionDate: new Date('2024-06-15'),
+        client: 'ABC Vastgoed BV',
+        budget: '€2.5M',
+        duration: '18 maanden',
+        images: ['https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800'],
+        featured: true,
+        status: 'completed',
+        order: 1
+      },
+      {
+        titleNl: 'Luxe Wooncomplex Rotterdam',
+        titleEn: 'Luxury Residential Complex Rotterdam',
+        descriptionNl: 'Renovatie en uitbreiding van een historisch pand tot luxe appartementen.',
+        descriptionEn: 'Renovation and expansion of a historic building into luxury apartments.',
+        category: 'renovatie',
+        location: 'Rotterdam',
+        completionDate: new Date('2024-03-20'),
+        client: 'XYZ Ontwikkeling',
+        budget: '€1.8M',
+        duration: '12 maanden',
+        images: ['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800'],
+        featured: true,
+        status: 'completed',
+        order: 2
+      },
+      {
+        titleNl: 'Duurzaam Schoolgebouw Utrecht',
+        titleEn: 'Sustainable School Building Utrecht',
+        descriptionNl: 'Energieneutraal schoolgebouw met zonnepanelen en groene daken.',
+        descriptionEn: 'Energy-neutral school building with solar panels and green roofs.',
+        category: 'duurzaam',
+        location: 'Utrecht',
+        completionDate: new Date('2024-09-01'),
+        client: 'Gemeente Utrecht',
+        budget: '€3.2M',
+        duration: '24 maanden',
+        images: ['https://images.unsplash.com/photo-1562564055-71e051d33c19?w=800'],
+        featured: true,
+        status: 'completed',
+        order: 3
+      },
+      {
+        titleNl: 'Restauratie Monumentaal Pand Den Haag',
+        titleEn: 'Restoration Monumental Building The Hague',
+        descriptionNl: 'Zorgvuldige restauratie van een 17e-eeuws monument.',
+        descriptionEn: 'Careful restoration of a 17th-century monument.',
+        category: 'restauratie',
+        location: 'Den Haag',
+        completionDate: new Date('2023-12-10'),
+        client: 'Rijksdienst voor het Cultureel Erfgoed',
+        budget: '€1.5M',
+        duration: '16 maanden',
+        images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'],
+        featured: false,
+        status: 'completed',
+        order: 4
+      },
+      {
+        titleNl: 'Winkelcentrum Eindhoven',
+        titleEn: 'Shopping Center Eindhoven',
+        descriptionNl: 'Nieuwbouw van een modern winkelcentrum met parkeergarage.',
+        descriptionEn: 'New construction of a modern shopping center with parking garage.',
+        category: 'nieuwbouw',
+        location: 'Eindhoven',
+        completionDate: new Date('2024-11-30'),
+        client: 'Retail Partners NV',
+        budget: '€4.5M',
+        duration: '20 maanden',
+        images: ['https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800'],
+        featured: false,
+        status: 'in_progress',
+        order: 5
+      }
+    ]);
+
     // Seed Testimonials
     await db.insert(testimonials).values([
       {
@@ -205,7 +289,8 @@ export async function POST() {
         blogArticles: 3,
         teamMembers: 3,
         partners: 3,
-        testimonials: 3
+        testimonials: 3,
+        projects: 5
       }
     });
   } catch (error: any) {
