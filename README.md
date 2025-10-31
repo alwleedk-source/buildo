@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏗️ BouwMeesters Amsterdam BV - Next.js Version
 
-## Getting Started
+> **مشروع محول من React SPA + Express إلى Next.js SSR لتحسين SEO والأداء**
 
-First, run the development server:
+---
+
+## ⚠️ حالة المشروع
+
+**المشروع قيد التحويل - غير جاهز للإنتاج**
+
+التقدم الحالي: **~15%** من التحويل الكامل
+
+---
+
+## 🎯 الهدف
+
+تحويل موقع BouwMeesters Amsterdam BV إلى Next.js لتحقيق:
+- ✅ **SEO 100%** - Server-Side Rendering
+- ✅ **Performance 100%** - Lighthouse Score  
+- ✅ **سرعة خارقة** - Core Web Vitals ممتازة
+- ✅ **تكلفة أقل** - استضافة أرخص
+
+---
+
+## 📊 المقارنة
+
+| المعيار | React SPA | Next.js SSR |
+|---------|-----------|-------------|
+| SEO Score | 40-50 | **95-100** |
+| Performance | 50-60 | **95-100** |
+| Time to Interactive | 5-8s | **< 1s** |
+| JavaScript Size | 2-3 MB | **~200 KB** |
+| Hosting Cost | $50-100/mo | **$5-10/mo** |
+
+---
+
+## 🚀 البدء السريع
+
+### المتطلبات
+- Node.js >= 20.18.0
+- PostgreSQL
+- npm
+
+### التثبيت
 
 ```bash
+# 1. تثبيت المتطلبات
+npm install
+
+# 2. إعداد قاعدة البيانات
+cp .env.example .env.local
+# عدّل DATABASE_URL في .env.local
+
+# 3. تطبيق schema
+npm run db:push
+
+# 4. تشغيل المشروع
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 هيكل المشروع
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+buildo-nextjs/
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── api/           # API Routes
+│   │   └── ...            # Pages (قيد التحويل)
+│   ├── lib/               # Utilities
+│   │   ├── db/           # Database
+│   │   └── auth.ts       # Authentication
+│   └── components/        # Components (قيد التحويل)
+├── public/               # Static files
+└── package.json
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🔧 Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run dev          # Development
+npm run build        # Build
+npm run start        # Production
+npm run db:push      # Apply schema
+npm run db:studio    # Database UI
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📊 حالة التحويل
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+راجع `CONVERSION_PROGRESS.md` للتفاصيل الكاملة.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ✅ مكتمل (~15%)
+- Next.js setup
+- Database & Schema
+- Auth APIs (login, logout, user)
+- بعض Content APIs
+
+### 🔄 متبقي (~85%)
+- ~45 API route
+- 45 صفحة
+- ~30 component
+- Email system
+- File uploads
+- Auto backups
+
+---
+
+## 🚂 النشر على Railway
+
+راجع ملف `RAILWAY_DEPLOYMENT.md` (سيتم إنشاؤه لاحقاً).
+
+### المتغيرات المطلوبة
+```env
+DATABASE_URL=<from-railway>
+JWT_SECRET=<random-secret>
+ADMIN_EMAIL=admin@buildit-professional.com
+ADMIN_PASSWORD=<your-password>
+```
+
+---
+
+## 📝 ملاحظات
+
+1. **المشروع غير مكتمل** - يحتاج 2-3 أيام عمل إضافية
+2. **الأولوية**: API Routes → Pages → Components
+3. **للمساهمة**: راجع `API_CONVERSION_GUIDE.md`
+
+---
+
+**الحالة**: 🔄 قيد التطوير | **التقدم**: 15%
