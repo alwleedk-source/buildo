@@ -17,11 +17,18 @@ export default function ProjectsAdmin() {
             { name: 'descriptionNl', label: 'Description (NL)', type: 'textarea', required: true },
             { name: 'descriptionEn', label: 'Description (EN)', type: 'textarea', required: true },
             { name: 'location', label: 'Location', type: 'text' },
-            { name: 'category', label: 'Category', type: 'text' },
+            { name: 'categoryNl', label: 'Category (NL)', type: 'text', required: true },
+            { name: 'categoryEn', label: 'Category (EN)', type: 'text', required: true },
+            { name: 'year', label: 'Year', type: 'text' },
+            { name: 'status', label: 'Status', type: 'select', options: [
+              { value: 'completed', label: 'Completed' },
+              { value: 'in-progress', label: 'In Progress' },
+              { value: 'planned', label: 'Planned' }
+            ] },
             { name: 'image', label: 'Image URL', type: 'url' },
             { name: 'order', label: 'Order', type: 'number' },
           ]}
-          displayFields={['titleNl', 'location', 'category', 'order']}
+          displayFields={['titleNl', 'location', 'categoryNl', 'year', 'status']}
         />
       </div>
     </AdminLayout>
