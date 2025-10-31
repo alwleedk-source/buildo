@@ -1,5 +1,7 @@
 'use client';
 import { useSEO } from '@/hooks/useSEO';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
