@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from "@tanstack/react-query";
 import Link from 'next/link';
 import { useTranslation } from "react-i18next";
@@ -124,7 +126,7 @@ export function BlogSection() {
   ];
 
   const maxArticles = settings?.maxArticles || 3;
-  const displayArticles = articles.length > 0 ? articles.slice(0, maxArticles) : [];
+  const displayArticles = (Array.isArray(articles) && articles.length > 0) ? articles.slice(0, maxArticles) : [];
 
   const formatDate = (date: string | Date) => {
     return new Date(date).toLocaleDateString('en-GB', {

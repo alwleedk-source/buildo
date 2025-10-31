@@ -93,7 +93,7 @@ export function HomePage() {
   };
 
   // Filter visible sections and sort by order
-  const visibleSections = sectionSettings
+  const visibleSections = (Array.isArray(sectionSettings) ? sectionSettings : [])
     .filter(section => section.isVisible)
     .sort((a, b) => a.order - b.order);
 

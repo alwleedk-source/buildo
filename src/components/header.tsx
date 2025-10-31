@@ -47,7 +47,7 @@ export function Header() {
 
   // Helper function to get site setting value
   const getSiteSetting = (key: string, defaultValue: string = '') => {
-    const setting = siteSettings.find(s => s.key === key);
+    const setting = Array.isArray(siteSettings) ? siteSettings.find(s => s.key === key) : undefined;
     return setting?.value || defaultValue;
   };
 
@@ -74,7 +74,7 @@ export function Header() {
 
   // Helper function to check if section should be visible in header
   const isSectionVisible = (sectionKey: string) => {
-    if (isLoading || sectionSettings.length === 0) return false; // Hide during loading or if no settings
+    if (isLoading || !Array.isArray(sectionSettings) || sectionSettings.length === 0) return false; // Hide during loading or if no settings
     const setting = sectionSettings.find(s => s.sectionKey === sectionKey);
     return setting ? setting.isVisible && setting.showInHeader : false;
   };
@@ -103,7 +103,7 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center space-x-3" data-testid="logo-container">
             {/* Always show logo if URL exists, regardless of loading state */}
-            {siteSettings.length > 0 && siteSettings.find(s => s.key === 'logoUrl')?.value ? (
+            {Array.isArray(siteSettings) && siteSettings.length > 0 && siteSettings.find(s => s.key === 'logoUrl')?.value ? (
               <div 
                 className="flex items-center justify-center flex-shrink-0"
                 style={{ 

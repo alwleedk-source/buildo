@@ -43,7 +43,7 @@ export function ProjectsSection() {
   });
 
   // Generate dynamic filters from actual project data
-  const uniqueCategories = Array.from(new Set(projects.map(project => project.categoryNl).filter(Boolean)));
+  const uniqueCategories = Array.from(new Set((Array.isArray(projects) ? projects : []).map(project => project.categoryNl).filter(Boolean)));
   const filters = [
     { key: 'all', label: 'Alle Projecten' },
     ...uniqueCategories.map(category => ({
@@ -85,8 +85,8 @@ export function ProjectsSection() {
 
   // Filter projects based on selected category
   const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.categoryNl?.toLowerCase() === activeFilter);
+    ? (Array.isArray(projects) ? projects : []) 
+    : (Array.isArray(projects) ? projects : []).filter(project => project.categoryNl?.toLowerCase() === activeFilter);
   
   // Show only 4 projects on homepage
   const displayProjects = filteredProjects.slice(0, 4);

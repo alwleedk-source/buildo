@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -116,7 +118,7 @@ export function ServicesSection() {
     }
   ];
 
-  const displayServices = services.length > 0 ? services.slice(0, 4) : defaultServices.slice(0, 4);
+  const displayServices = (Array.isArray(services) && services.length > 0) ? services.slice(0, 4) : defaultServices.slice(0, 4);
 
   return (
     <section id="services" className="py-20" data-testid="section-services">

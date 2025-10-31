@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -89,7 +91,7 @@ export function MaatschappelijkeSection() {
             </div>
           ) : (
             <div className={getGridClasses()}>
-              {initiatives.slice(0, 3).map((item, index) => (
+              {(Array.isArray(initiatives) ? initiatives : []).slice(0, 3).map((item, index) => (
                 <Card key={item.id} className={getCardClasses()} data-testid={`maatschappelijke-item-${item.id}`}>
                   <div className="relative overflow-hidden">
                     {item.image ? (

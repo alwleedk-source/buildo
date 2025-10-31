@@ -38,7 +38,7 @@ export function Footer() {
 
   // Helper function to check if section should be visible in footer
   const isSectionVisible = (sectionKey: string) => {
-    if (isLoading || sectionSettings.length === 0) return false; // Hide during loading or if no settings
+    if (isLoading || !Array.isArray(sectionSettings) || sectionSettings.length === 0) return false; // Hide during loading or if no settings
     const setting = sectionSettings.find(s => s.sectionKey === sectionKey);
     return setting ? setting.isVisible && setting.showInFooter : false;
   };
@@ -186,7 +186,7 @@ export function Footer() {
                 Services
               </h3>
               <ul className="space-y-2">
-                {services.filter(service => service.isActive).slice(0, 5).map((service) => (
+                {(Array.isArray(services) ? services : []).filter(service => service.isActive).slice(0, 5).map((service) => (
                   <li key={service.id}>
                     <button 
                       onClick={() => navigateToPage(`/services/${service.slugNl || service.id}`)}

@@ -74,7 +74,7 @@ export function ContactSection() {
     e.preventDefault();
     
     // Dynamic validation based on form settings
-    const missingRequiredFields = formSettings
+    const missingRequiredFields = (Array.isArray(formSettings) ? formSettings : [])
       .filter(setting => setting.isVisible && setting.isRequired)
       .filter(setting => {
         const fieldKey = setting.fieldKey as keyof InsertContactInquiry;
@@ -176,7 +176,7 @@ export function ContactSection() {
 
   // Helper functions for contact info
   const getContactInfoByType = (type: string) => {
-    return contactInfo.find(info => info.type === type && info.isActive);
+    return Array.isArray(contactInfo) ? contactInfo.find(info => info.type === type && info.isActive) : undefined;
   };
 
   const getIconByType = (type: string) => {
@@ -228,7 +228,7 @@ export function ContactSection() {
                 ) : (
                   <>
                     {/* Group fields by order and render dynamically */}
-                    {formSettings
+                    {(Array.isArray(formSettings) ? formSettings : [])
                       .filter(setting => setting.isVisible)
                       .sort((a, b) => (a.order || 0) - (b.order || 0))
                       .reduce((acc, setting, index, array) => {
@@ -289,7 +289,7 @@ export function ContactSection() {
                 </h3>
                 <div className="space-y-6">
                   {/* Dynamic Contact Info */}
-                  {contactInfo
+                  {(Array.isArray(contactInfo) ? contactInfo : [])
                     .filter(info => info.isActive && info.type !== 'hours')
                     .sort((a, b) => (a.order || 0) - (b.order || 0))
                     .map((info) => (

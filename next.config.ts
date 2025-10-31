@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Skip static generation for admin pages
+  async generateBuildId() {
+    return 'build-' + Date.now();
+  },
 };
 
 export default nextConfig;
