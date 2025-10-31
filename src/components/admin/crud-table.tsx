@@ -171,7 +171,7 @@ export function CRUDTable({ title, description, apiEndpoint, fields, displayFiel
               </TableRow>
             </TableHeader>
             <TableBody>
-              {items.length === 0 ? (
+              {!Array.isArray(items) || items.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={displayFields.length + 1} className="text-center text-muted-foreground">
                     No items found. Click "Add New" to create one.
