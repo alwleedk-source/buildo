@@ -116,7 +116,7 @@ export function ServicesSection() {
     }
   ];
 
-  const displayServices = services.length > 0 ? services : defaultServices;
+  const displayServices = services.length > 0 ? services.slice(0, 4) : defaultServices.slice(0, 4);
 
   return (
     <section id="services" className="py-20" data-testid="section-services">
@@ -162,6 +162,16 @@ export function ServicesSection() {
             </Card>
           ))}
         </div>
+        {services.length > 4 && (
+          <div className="text-center mt-12">
+            <Link
+              href="/services"
+              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            >
+              {t('common.viewAll')} →
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

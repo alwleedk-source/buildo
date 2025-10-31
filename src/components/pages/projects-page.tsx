@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ChevronRight, MapPin, Calendar, ArrowRight, Building2, Home, Factory } from "lucide-react";
+import Link from 'next/link';
 import type { Project } from '@/lib/db/schema';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -163,10 +164,8 @@ export function ProjectsPage() {
       <div className="border-b bg-muted/50 mt-16">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link href="/" data-testid="breadcrumb-home">
-              <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground">
-                Home
-              </Button>
+            <Link href="/" className="p-0 h-auto text-muted-foreground hover:text-foreground" data-testid="breadcrumb-home">
+              Home
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-foreground font-medium">
@@ -297,9 +296,11 @@ export function ProjectsPage() {
                   </p>
                   
                   <Link href={`/projects/${project.id}`} data-testid={`link-project-${project.id}`}>
-                    <Button className="w-full group">
-                      {currentLang === 'en' ? 'View Project' : 'Bekijk Project'}
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    <Button className="w-full group" asChild>
+                      <span>
+                        {currentLang === 'en' ? 'View Project' : 'Bekijk Project'}
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </Button>
                   </Link>
                 </CardContent>
@@ -323,8 +324,10 @@ export function ProjectsPage() {
             }
           </p>
           <Link href="/#contact">
-            <Button size="lg" data-testid="button-contact-cta">
-              {currentLang === 'en' ? 'Start Your Project' : 'Start Uw Project'}
+            <Button size="lg" data-testid="button-contact-cta" asChild>
+              <span>
+                {currentLang === 'en' ? 'Start Your Project' : 'Start Uw Project'}
+              </span>
             </Button>
           </Link>
         </div>

@@ -267,7 +267,7 @@ export function Footer() {
             {footerSettings?.copyrightText || `© ${new Date().getFullYear()} BuildIt Professional. All rights reserved.`}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            {legalPages
+            {Array.isArray(legalPages) && legalPages
               .filter(page => page.showInFooter && page.isActive)
               .sort((a, b) => a.order - b.order)
               .map(page => (

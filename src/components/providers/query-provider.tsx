@@ -11,6 +11,13 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
           queries: {
             staleTime: 60 * 1000,
             refetchOnWindowFocus: false,
+            queryFn: async ({ queryKey }) => {
+              const response = await fetch(queryKey[0] as string);
+              if (!response.ok) {
+                throw new Error(`Failed to fetch ${queryKey[0]}`);
+              }
+              return response.json();
+            },
           },
         },
       })

@@ -87,6 +87,9 @@ export function ProjectsSection() {
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.categoryNl?.toLowerCase() === activeFilter);
+  
+  // Show only 4 projects on homepage
+  const displayProjects = filteredProjects.slice(0, 4);
 
   return (
     <section id="projects" className="py-20 bg-muted" data-testid="projects-section">
@@ -122,9 +125,9 @@ export function ProjectsSection() {
         )}
 
         {/* Projects Grid */}
-        {filteredProjects.length > 0 ? (
+        {displayProjects.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {displayProjects.map((project) => (
               <Card
                 key={project.id}
                 className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow"

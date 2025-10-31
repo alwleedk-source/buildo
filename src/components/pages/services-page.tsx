@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ChevronRight, Building2, Wrench, Factory, Hammer, ArrowRight } from "lucide-react";
+import Link from 'next/link';
 import type { Service } from '@/lib/db/schema';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
@@ -19,6 +20,11 @@ export function ServicesPage() {
 
   const { data: services = [], isLoading } = useQuery<Service[]>({
     queryKey: ['/api/services'],
+    queryFn: async () => {
+      const response = await fetch('/api/services');
+      if (!response.ok) throw new Error('Failed to fetch services');
+      return response.json();
+    }
   });
 
   // SEO optimization
@@ -86,10 +92,8 @@ export function ServicesPage() {
       <div className="border-b bg-muted/50 mt-16">
         <div className="container mx-auto px-4 py-4">
           <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Link href="/" data-testid="breadcrumb-home">
-              <a className="p-0 h-auto text-muted-foreground hover:text-foreground">
-                Home
-              </a>
+            <Link href="/" className="p-0 h-auto text-muted-foreground hover:text-foreground" data-testid="breadcrumb-home">
+              Home
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span className="text-foreground font-medium">
@@ -172,12 +176,10 @@ export function ServicesPage() {
                 </div>
 
                 <CardContent className="p-6">
-                  <Link href={`/services/${service.slugNl || slugify(service.titleNl)}`} rel="nofollow">
-                    <a className="cursor-pointer">
-                      <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
-                        {currentLang === 'en' ? (service.titleEn || service.titleNl) : service.titleNl}
-                      </h3>
-                    </a>
+                  <Link href={`/services/${service.slugNl || slugify(service.titleNl)}`} className="cursor-pointer" rel="nofollow">
+                    <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+                      {currentLang === 'en' ? (service.titleEn || service.titleNl) : service.titleNl}
+                    </h3>
                   </Link>
 
                   <p className="text-muted-foreground mb-6 line-clamp-3">
@@ -185,9 +187,11 @@ export function ServicesPage() {
                   </p>
 
                   <Link href={`/services/${service.slugNl || slugify(service.titleNl)}`} data-testid={`link-service-${service.slugNl}`} rel="nofollow">
-                    <Button className="w-full group">
-                      {currentLang === 'en' ? 'More Information' : 'Meer Informatie'}
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    <Button className="w-full group" asChild>
+                      <span>
+                        {currentLang === 'en' ? 'More Information' : 'Meer Informatie'}
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </Button>
                   </Link>
                 </CardContent>
@@ -211,8 +215,10 @@ export function ServicesPage() {
             }
           </p>
           <Link href="/#contact">
-            <Button size="lg" data-testid="button-contact-cta">
-              {currentLang === 'en' ? 'Get In Touch' : 'Neem Contact Op'}
+            <Button size="lg" data-testid="button-contact-cta" asChild>
+              <span>
+                {currentLang === 'en' ? 'Get In Touch' : 'Neem Contact Op'}
+              </span>
             </Button>
           </Link>
         </div>
