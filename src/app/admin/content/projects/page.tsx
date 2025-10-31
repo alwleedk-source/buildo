@@ -25,7 +25,8 @@ export default function ProjectsAdmin() {
               { value: 'in-progress', label: 'In Progress' },
               { value: 'planned', label: 'Planned' }
             ] },
-            { name: 'image', label: 'Image URL', type: 'url' },
+            { name: 'image', label: 'Featured Image URL', type: 'url' },
+            { name: 'gallery', label: 'Gallery Images (comma-separated URLs)', type: 'textarea', placeholder: 'https://example.com/image1.jpg, https://example.com/image2.jpg' },
             { name: 'order', label: 'Order', type: 'number' },
           ]}
           displayFields={['titleNl', 'location', 'categoryNl', 'year', 'status']}
