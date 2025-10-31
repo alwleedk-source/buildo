@@ -68,8 +68,7 @@ const sidebarData: SidebarItem[] = [
     title: "Statistieken",
     icon: BarChart3,
     children: [
-      { id: "stats-content", title: "Statistiek Content", icon: BarChart3, path: "/admin/statistics/content" },
-      { id: "stats-settings", title: "Weergave Instellingen", icon: Settings, path: "/admin/statistics/settings" }
+      { id: "stats-content", title: "Statistiek Content", icon: BarChart3, path: "/admin/content/statistics" }
     ]
   },
   {

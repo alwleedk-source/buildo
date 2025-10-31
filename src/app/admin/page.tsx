@@ -20,63 +20,63 @@ export default function AdminDashboard() {
       title: 'Hero Section',
       description: 'Manage homepage hero content, video, and text',
       icon: Home,
-      href: '/admin/hero',
+      href: '/admin/content/hero',
       color: 'bg-blue-500'
     },
     {
       title: 'Services',
       description: 'Manage services and service details',
       icon: Wrench,
-      href: '/admin/services',
+      href: '/admin/content/services',
       color: 'bg-green-500'
     },
     {
       title: 'Projects',
       description: 'Manage project portfolio and case studies',
       icon: FolderKanban,
-      href: '/admin/projects',
+      href: '/admin/content/projects',
       color: 'bg-purple-500'
     },
     {
       title: 'Blog',
       description: 'Manage blog articles and categories',
       icon: FileText,
-      href: '/admin/blog',
+      href: '/admin/content/blog',
       color: 'bg-orange-500'
     },
     {
       title: 'Team',
       description: 'Manage team members and their information',
       icon: Users,
-      href: '/admin/team',
+      href: '/admin/content/team',
       color: 'bg-pink-500'
     },
     {
       title: 'Partners',
       description: 'Manage partner logos and links',
       icon: Handshake,
-      href: '/admin/partners',
+      href: '/admin/content/partners',
       color: 'bg-indigo-500'
     },
     {
       title: 'Testimonials',
       description: 'Manage customer reviews and testimonials',
       icon: MessageSquare,
-      href: '/admin/testimonials',
+      href: '/admin/content/testimonials',
       color: 'bg-yellow-500'
     },
     {
       title: 'Contact Messages',
       description: 'View and manage contact form submissions',
       icon: Mail,
-      href: '/admin/contact-messages',
+      href: '/admin/communication/inquiries',
       color: 'bg-red-500'
     },
     {
       title: 'Form Settings',
       description: 'Configure contact form fields',
       icon: Settings,
-      href: '/admin/contact-form-settings',
+      href: '/admin/settings/general',
       color: 'bg-gray-500'
     }
   ];
