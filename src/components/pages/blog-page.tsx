@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import Link from 'next/link';
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Card, CardContent } from '@/components/ui/card';
