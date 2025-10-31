@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useLanguage } from '@/contexts/language-context';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,7 +34,8 @@ interface ContactInfo {
 }
 
 export default function ContactPage() {
-  const { language } = useLanguage();
+  const { i18n } = useTranslation();
+  const language = i18n.language || 'nl';
   const [formFields, setFormFields] = useState<FormField[]>([]);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({});
   const [formData, setFormData] = useState<Record<string, string>>({});
