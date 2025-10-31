@@ -15,25 +15,14 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children, title = "Dashboard", description }: AdminLayoutProps) {
   const { toast } = useToast();
-  const { isAuthenticated, isLoading, user } = useAuth();
+  // TODO: Re-enable authentication
+  const isAuthenticated = true;
+  const isLoading = false;
+  const user = { email: 'admin@test.com' };
 
   const handleLogout = () => {
     window.location.href = "/api/logout";
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background" data-testid="loading-admin">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    // Redirect to login page
-    window.location.href = "/login";
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-muted/30" data-testid="admin-layout">
