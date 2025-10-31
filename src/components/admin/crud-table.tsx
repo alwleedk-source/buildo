@@ -51,7 +51,9 @@ export function CRUDTable({ title, description, apiEndpoint, fields, displayFiel
     queryFn: async () => {
       const res = await fetch(apiEndpoint);
       if (!res.ok) throw new Error('Failed to fetch');
-      return res.json();
+      const json = await res.json();
+      // Handle both {data: [...]} and [...] response formats
+      return json.data || json;
     },
   });
 
