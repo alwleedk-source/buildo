@@ -1,25 +1,46 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { requireAuth } from '@/lib/auth';
+import { partners } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
+
+export async function GET() {
+  try {
+    const allPartners = await db.select().from(partners);
+    return NextResponse.json({ data: allPartners, success: true });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
-    await requireAuth();
-
-    const data = await request.json();
-    // TODO: Implement POST logic
-    return NextResponse.json({ data: [], success: true }, { status: 200 });
+    const body = await request.json();
+    const [newPartner] = await db.insert(partners).values(body).returning();
+    return NextResponse.json({ data: newPartner, success: true });
   } catch (error: any) {
-    if (error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-    console.error('API error:', error);
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { id, ...data } = body;
+    const [updated] = await db.update(partners).set(data).where(eq(partners.id, id)).returning();
+    return NextResponse.json({ data: updated, success: true });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    if (!id) return NextResponse.json({ error: 'ID required' }, { status: 400 });
+    await db.delete(partners).where(eq(partners.id, id));
+    return NextResponse.json({ success: true });
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
