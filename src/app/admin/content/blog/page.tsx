@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AdminLayout } from '@/components/admin/admin-layout';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import { BlogList } from '@/components/admin/blog/blog-list';
+import { BlogListSimple } from '@/components/admin/blog/blog-list-simple';
 import { BlogEditor } from '@/components/admin/blog/blog-editor';
 
 export default function BlogAdmin() {
@@ -48,7 +48,7 @@ export default function BlogAdmin() {
                 New Article
               </Button>
             </div>
-            <BlogList onEdit={handleEdit} />
+            <BlogListSimple onEdit={handleEdit} />
           </>
         )}
       </div>
