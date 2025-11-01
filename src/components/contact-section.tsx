@@ -19,17 +19,21 @@ export function ContactSection() {
   const { i18n } = useTranslation();
 
   // Fetch contact info, company details, and form settings
-  const { data: contactInfo = [] } = useQuery<ContactInfo[]>({
+  const { data: contactInfoResponse } = useQuery<{ data: ContactInfo[]; success: boolean }>({
     queryKey: ['/api/contact-info'],
   });
+  
+  const contactInfo = contactInfoResponse?.data || [];
 
   const { data: companyDetails } = useQuery<CompanyDetails | null>({
     queryKey: ['/api/company-details'],
   });
 
-  const { data: formSettings = [] } = useQuery<ContactFormSetting[]>({
+  const { data: formSettingsResponse } = useQuery<{ data: ContactFormSetting[]; success: boolean }>({
     queryKey: ['/api/contact-form-settings'],
   });
+  
+  const formSettings = formSettingsResponse?.data || [];
 
   const [formData, setFormData] = useState<InsertContactInquiry>({
     firstName: '',
