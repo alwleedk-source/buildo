@@ -128,16 +128,15 @@ export function AboutSection() {
                 </div>
               ))}
             </div>
-            {/* Only show "Meer Over Ons" button if About Us page is active */}
-            {aboutUsPage?.isActive && (
+            {/* Link to detailed Over Ons page */}
+            <a href="/over-ons">
               <Button 
                 className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors" 
-                onClick={() => window.open('/about-us', '_blank')}
                 data-testid="button-learn-more"
               >
                 {isNl ? "Meer Over Ons" : "Learn More About Us"}
               </Button>
-            )}
+            </a>
           </div>
           <div className="relative">
             <img
