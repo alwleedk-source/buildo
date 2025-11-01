@@ -8,6 +8,13 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
-export default function Page() {
-  return <BlogPageServer />;
+interface PageProps {
+  searchParams?: {
+    category?: string;
+    tag?: string;
+  };
+}
+
+export default function Page({ searchParams }: PageProps) {
+  return <BlogPageServer searchParams={searchParams} />;
 }
