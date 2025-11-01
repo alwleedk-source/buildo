@@ -70,7 +70,8 @@ export function BlogArticlePage() {
     });
   };
 
-  const calculateReadingTime = (content: string) => {
+  const calculateReadingTime = (content: string | null | undefined) => {
+    if (!content) return 1;
     const wordsPerMinute = 200;
     const wordCount = content.split(/\s+/).length;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
@@ -135,7 +136,7 @@ export function BlogArticlePage() {
   }
 
   const title = isNl ? article.titleNl : article.titleEn || article.titleNl;
-  const content = isNl ? article.contentNl : article.contentEn || article.contentNl;
+  const content = (isNl ? article.contentNl : article.contentEn || article.contentNl) || '';
   const excerpt = isNl ? article.excerptNl : article.excerptEn || article.excerptNl;
   const category = isNl ? article.categoryNl : article.categoryEn || article.categoryNl;
   const tags = isNl ? article.tagsNl : article.tagsEn || article.tagsNl;
