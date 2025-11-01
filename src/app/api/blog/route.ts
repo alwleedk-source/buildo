@@ -1,14 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { blogArticles } from '@/lib/db/schema';
+import { desc, eq } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
   try {
-    // TODO: Fetch data
-    return NextResponse.json({ data: [], success: true }, { status: 200 });
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '10');
+    const category = searchParams.get('category');
+    const tag = searchParams.get('tag');
+    const search = searchParams.get('search');
+    
+    const offset = (page - 1) * limit;
+    
+    // Build query
+    let query = db
+      .select()
+      .from(blogArticles)
+      .where(eq(blogArticles.isPublished, true))
+      .orderBy(desc(blogArticles.createdAt))
+      .limit(limit)
+      .offset(offset);
+    
+    const articles = await query;
+    
+    // Get total count for pagination
+    const totalResult = await db
+      .select()
+      .from(blogArticles)
+      .where(eq(blogArticles.isPublished, true));
+    
+    const total = totalResult.length;
+    const totalPages = Math.ceil(total / limit);
+    
+    return NextResponse.json({
+      data: articles,
+      success: true,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages,
+      },
+    });
   } catch (error: any) {
-    console.error('API error:', error);
+    console.error('GET /api/blog error:', error);
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { error: error.message, success: false },
       { status: 500 }
     );
   }
