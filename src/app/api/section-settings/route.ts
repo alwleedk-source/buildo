@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { sectionSettings } from '@/lib/db/schema';
+import { asc } from 'drizzle-orm';
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest) {
     let settings = await db
       .select()
       .from(sectionSettings)
-      .orderBy(sectionSettings.order);
+      .orderBy(asc(sectionSettings.order));
     
     // If no sections exist, create default ones
     if (settings.length === 0) {
@@ -122,7 +123,7 @@ export async function GET(request: NextRequest) {
       settings = await db
         .select()
         .from(sectionSettings)
-        .orderBy(sectionSettings.order);
+        .orderBy(asc(sectionSettings.order));
     }
     
     return NextResponse.json(settings);
