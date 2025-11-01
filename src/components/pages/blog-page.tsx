@@ -17,12 +17,12 @@ import { BlogSidebar } from '@/components/blog/blog-sidebar';
 
 interface BlogResponse {
   articles: BlogArticle[];
+  success: boolean;
   pagination: {
-    currentPage: number;
-    totalPages: number;
-    totalCount: number;
+    page: number;
     limit: number;
-    hasMore: boolean;
+    total: number;
+    totalPages: number;
   };
 }
 
@@ -39,7 +39,9 @@ export function BlogPage() {
     queryFn: async () => {
       const response = await fetch(`/api/blog?page=${currentPage}&limit=${limit}`);
       if (!response.ok) throw new Error('Failed to fetch blog articles');
-      return response.json();
+      const data = await response.json();
+      console.log('Blog API Response:', data);
+      return data;
     }
   });
 
@@ -139,7 +141,7 @@ export function BlogPage() {
 
     const pages = [];
     const maxVisiblePages = 5;
-    const start = Math.max(1, pagination.currentPage - Math.floor(maxVisiblePages / 2));
+    const start = Math.max(1, pagination.page - Math.floor(maxVisiblePages / 2));
     const end = Math.min(pagination.totalPages, start + maxVisiblePages - 1);
 
     for (let i = start; i <= end; i++) {
@@ -151,8 +153,8 @@ export function BlogPage() {
         <Button
           variant="outline"
           size="sm"
-          onClick={() => handlePageChange(pagination.currentPage - 1)}
-          disabled={pagination.currentPage === 1}
+          onClick={() => handlePageChange(pagination.page - 1)}
+          disabled={pagination.page === 1}
           data-testid="button-prev-page"
         >
           <ChevronLeft className="w-4 h-4 mr-1" />
@@ -176,7 +178,7 @@ export function BlogPage() {
           {pages.map(page => (
             <Button
               key={page}
-              variant={page === pagination.currentPage ? "default" : "outline"}
+              variant={page === pagination.page ? "default" : "outline"}
               size="sm"
               onClick={() => handlePageChange(page)}
               data-testid={`button-page-${page}`}
@@ -202,8 +204,8 @@ export function BlogPage() {
         <Button
           variant="outline"
           size="sm"
-          onClick={() => handlePageChange(pagination.currentPage + 1)}
-          disabled={pagination.currentPage === pagination.totalPages}
+          onClick={() => handlePageChange(pagination.page + 1)}
+          disabled={pagination.page === pagination.totalPages}
           data-testid="button-next-page"
         >
           {currentLang === 'en' ? 'Next' : 'Volgende'}

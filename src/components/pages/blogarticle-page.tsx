@@ -210,9 +210,9 @@ export function BlogArticlePage() {
             </div>
 
             {/* Tags */}
-            {tags && tags.length > 0 && (
+            {tags && (
               <div className="flex flex-wrap gap-2 mb-6">
-                {tags.map((tag, index) => (
+                {(typeof tags === 'string' ? tags.split(',').map(t => t.trim()) : tags).map((tag, index) => (
                   <Badge key={index} variant="outline" className="text-xs">
                     {tag}
                   </Badge>
