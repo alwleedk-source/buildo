@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
-import { BlogPage } from '@/components/pages/blog-page';
+import { BlogPageServer } from '@/components/pages/blog-page-server';
 
 export const metadata: Metadata = {
   title: 'Blog - BouwMeesters Amsterdam',
-  description: 'Blog - BouwMeesters Amsterdam page',
+  description: 'Ontdek de nieuwste trends, tips en inzichten uit de bouwwereld',
 };
 
 export const dynamic = 'force-dynamic';
 
 export default function Page() {
-  return <BlogPage />;
+  return <BlogPageServer />;
 }
