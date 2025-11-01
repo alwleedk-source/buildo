@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { contactInquiries } from '@/lib/db/schema';
+import { desc } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,7 +56,7 @@ export async function GET() {
     const messages = await db
       .select()
       .from(contactInquiries)
-      .orderBy(contactInquiries.createdAt);
+      .orderBy(desc(contactInquiries.createdAt));
     
     return NextResponse.json({ data: messages, success: true });
   } catch (error: any) {

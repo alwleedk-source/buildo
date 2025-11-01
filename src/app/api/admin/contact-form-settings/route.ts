@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { contactFormSettings } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, asc } from 'drizzle-orm';
 
 // GET - Get all contact form settings
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
     const settings = await db
       .select()
       .from(contactFormSettings)
-      .orderBy(contactFormSettings.order);
+      .orderBy(asc(contactFormSettings.order));
     
     return NextResponse.json({ data: settings, success: true });
   } catch (error: any) {
