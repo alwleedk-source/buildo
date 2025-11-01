@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { contactMessages } from '@/lib/db/schema';
+import { contactInquiries } from '@/lib/db/schema';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
 
     // Insert into database
     const [newMessage] = await db
-      .insert(contactMessages)
+      .insert(contactInquiries)
       .values({
         firstName,
         lastName,
@@ -54,8 +54,8 @@ export async function GET() {
   try {
     const messages = await db
       .select()
-      .from(contactMessages)
-      .orderBy(contactMessages.createdAt);
+      .from(contactInquiries)
+      .orderBy(contactInquiries.createdAt);
     
     return NextResponse.json({ data: messages, success: true });
   } catch (error: any) {
