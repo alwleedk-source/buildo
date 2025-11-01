@@ -37,7 +37,7 @@ export function BlogSection() {
   const { i18n } = useTranslation();
   const currentLang = i18n.language;
   
-  const { data: blogData, isLoading } = useQuery<{articles: BlogArticle[]}>({
+  const { data: blogData, isLoading } = useQuery<{data: BlogArticle[], success: boolean}>({
     queryKey: ['/api/blog'],
     queryFn: async () => {
       const res = await fetch('/api/blog');
@@ -55,7 +55,7 @@ export function BlogSection() {
     },
   });
   
-  const articles = blogData?.articles || [];
+  const articles = blogData?.data || [];
 
   if (isLoading || settingsLoading) {
     return (
