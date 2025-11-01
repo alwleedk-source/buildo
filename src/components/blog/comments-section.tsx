@@ -40,11 +40,13 @@ export function CommentsSection({ articleId, language = 'nl' }: CommentsSectionP
   const { data: comments, isLoading } = useQuery<Comment[]>({
     queryKey: ['/api/blog/comments', articleId],
     queryFn: async () => {
+      if (!articleId) return [];
       const response = await fetch(`/api/blog/comments?articleId=${articleId}`);
       if (!response.ok) throw new Error('Failed to fetch comments');
       const data = await response.json();
       return data.comments || [];
-    }
+    },
+    enabled: !!articleId
   });
 
   // Submit comment mutation

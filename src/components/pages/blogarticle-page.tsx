@@ -324,11 +324,13 @@ export function BlogArticlePage() {
       )}
 
       {/* Comments Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          <CommentsSection articleId={article.id} language={currentLang as 'nl' | 'en'} />
+      {article?.id && (
+        <div className="container mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto">
+            <CommentsSection articleId={article.id} language={currentLang as 'nl' | 'en'} />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Back to Blog */}
       <div className="container mx-auto px-4 pb-12">
