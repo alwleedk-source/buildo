@@ -10,8 +10,11 @@ export async function GET(request: NextRequest) {
       .from(contactFormSettings)
       .orderBy(asc(contactFormSettings.order));
     
+    console.log('[Contact Form Settings] Retrieved settings count:', settings.length);
+    
     // If no settings exist, create default ones
     if (settings.length === 0) {
+      console.log('[Contact Form Settings] No settings found, creating defaults...');
       const defaultFields = [
         { fieldKey: 'firstName', labelNl: 'Voornaam', labelEn: 'First Name', fieldType: 'text', isRequired: true, isVisible: true, order: 1 },
         { fieldKey: 'lastName', labelNl: 'Achternaam', labelEn: 'Last Name', fieldType: 'text', isRequired: true, isVisible: true, order: 2 },
@@ -26,7 +29,9 @@ export async function GET(request: NextRequest) {
       ];
       
       await db.insert(contactFormSettings).values(defaultFields);
+      console.log('[Contact Form Settings] Defaults inserted successfully');
       settings = await db.select().from(contactFormSettings).orderBy(asc(contactFormSettings.order));
+      console.log('[Contact Form Settings] Retrieved after insert:', settings.length);
     }
     
     return NextResponse.json({ data: settings, success: true });
