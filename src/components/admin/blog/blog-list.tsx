@@ -34,12 +34,14 @@ interface BlogListProps {
 export function BlogList({ onEdit }: BlogListProps) {
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery<{ data: BlogArticle[] }>({
+  const { data, isLoading, error } = useQuery<{ data: BlogArticle[] }>({
     queryKey: ['/api/admin/blog'],
     queryFn: async () => {
       const res = await fetch('/api/admin/blog');
       if (!res.ok) throw new Error('Failed to fetch');
-      return res.json();
+      const json = await res.json();
+      console.log('BlogList API Response:', json);
+      return json;
     },
   });
 
@@ -74,7 +76,15 @@ export function BlogList({ onEdit }: BlogListProps) {
   const articles = data?.data || [];
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="p-8 text-center">Loading articles...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="p-8 text-center text-destructive">
+        Error loading articles: {error instanceof Error ? error.message : 'Unknown error'}
+      </div>
+    );
   }
 
   return (
