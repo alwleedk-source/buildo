@@ -31,7 +31,7 @@ interface Field {
   type: 'text' | 'textarea' | 'number' | 'url' | 'email' | 'checkbox' | 'datetime' | 'date' | 'select';
   required?: boolean;
   readonly?: boolean;
-  options?: string[];
+  options?: string[] | { value: string; label: string }[];
   placeholder?: string;
   help?: string;
 }
