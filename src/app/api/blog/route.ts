@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     const total = totalResult.length;
     const totalPages = Math.ceil(total / limit);
     
-    return NextResponse.json({
+    const response = NextResponse.json({
       data: articles,
       success: true,
       pagination: {
@@ -44,6 +44,14 @@ export async function GET(request: NextRequest) {
         totalPages,
       },
     });
+
+    // Add simple cache headers (2 minutes)
+    response.headers.set(
+      'Cache-Control',
+      'public, s-maxage=120, stale-while-revalidate=240'
+    );
+
+    return response;
   } catch (error: any) {
     console.error('GET /api/blog error:', error);
     return NextResponse.json(

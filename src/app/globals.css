@@ -18,3 +18,24 @@ body {
   color: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Simple performance optimizations */
+img {
+  content-visibility: auto;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

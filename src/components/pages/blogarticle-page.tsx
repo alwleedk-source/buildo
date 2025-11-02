@@ -290,7 +290,6 @@ export function BlogArticlePage() {
                   src={article.image}
                   alt={article.imageAlt || title}
                   className="w-full h-full object-cover"
-                  loading="eager"
                 />
               </div>
             </div>

@@ -159,6 +159,7 @@ export function BlogSection() {
                   src={article.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400'}
                   alt={currentLang === 'en' ? article.titleEn : article.titleNl}
                   className="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                   data-testid={`article-image-${article.id}`}
                 />
               </Link>
