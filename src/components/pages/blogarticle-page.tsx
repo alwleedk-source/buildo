@@ -23,6 +23,7 @@ import type { BlogArticle } from '@/lib/db/schema';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { TableOfContents } from '@/components/blog/table-of-contents';
+import { useEffect, useRef } from 'react';
 
 export function BlogArticlePage() {
   const { t, i18n } = useTranslation();
@@ -30,6 +31,7 @@ export function BlogArticlePage() {
   const slug = params?.slug;
   const currentLang = i18n.language;
   const isNl = currentLang === 'nl';
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const { data: article, isLoading, error } = useQuery<BlogArticle>({
     queryKey: ['/api/blog', slug],
@@ -59,6 +61,24 @@ export function BlogArticlePage() {
     },
     enabled: !!article?.id
   });
+
+  // Add IDs to headings for table of contents
+  useEffect(() => {
+    if (contentRef.current) {
+      const headings = contentRef.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      headings.forEach((heading, index) => {
+        if (!heading.id) {
+          const text = heading.textContent || '';
+          const id = text
+            .toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .substring(0, 50) || `heading-${index}`;
+          heading.id = id;
+        }
+      });
+    }
+  }, [article]);
 
   const formatDate = (date: Date | string) => {
     const locale = isNl ? 'nl-NL' : 'en-US';
@@ -260,17 +280,25 @@ export function BlogArticlePage() {
         </div>
       </div>
 
-      {/* Featured Image - Enhanced */}
+      {/* Featured Image - Enhanced with Aspect Ratio */}
       {article.image && (
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-5xl mx-auto">
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <img
-                src={article.image}
-                alt={article.imageAlt || title}
-                className="w-full h-auto object-cover"
-              />
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-muted">
+              <div className="aspect-video w-full">
+                <img
+                  src={article.image}
+                  alt={article.imageAlt || title}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
             </div>
+            {article.imageAlt && (
+              <p className="text-sm text-muted-foreground text-center mt-4 italic">
+                {article.imageAlt}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -280,20 +308,23 @@ export function BlogArticlePage() {
         <div className="grid lg:grid-cols-4 gap-12">
           {/* Article Content */}
           <div className="lg:col-span-3">
-            <article className="prose prose-lg md:prose-xl max-w-none dark:prose-invert
-              prose-headings:font-bold prose-headings:tracking-tight
-              prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
-              prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-              prose-p:leading-relaxed prose-p:mb-6
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-              prose-img:rounded-lg prose-img:shadow-md
-              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
-              prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded
-              prose-pre:bg-muted prose-pre:border prose-pre:border-border
-              prose-ul:list-disc prose-ul:pl-6
-              prose-ol:list-decimal prose-ol:pl-6
-              prose-li:mb-2
-            ">
+            <article 
+              ref={contentRef}
+              className="prose prose-lg md:prose-xl max-w-none dark:prose-invert
+                prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
+                prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+                prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+                prose-p:leading-relaxed prose-p:mb-6
+                prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                prose-img:rounded-lg prose-img:shadow-md prose-img:w-full
+                prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
+                prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded
+                prose-pre:bg-muted prose-pre:border prose-pre:border-border
+                prose-ul:list-disc prose-ul:pl-6
+                prose-ol:list-decimal prose-ol:pl-6
+                prose-li:mb-2
+              "
+            >
               <div dangerouslySetInnerHTML={{ __html: content }} />
             </article>
           </div>
@@ -328,7 +359,7 @@ export function BlogArticlePage() {
                   >
                     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full border-2 hover:border-primary">
                       {related.image && (
-                        <div className="relative overflow-hidden h-48">
+                        <div className="relative overflow-hidden aspect-video bg-muted">
                           <img
                             src={related.image}
                             alt={related.imageAlt || relatedTitle}
