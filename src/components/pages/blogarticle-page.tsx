@@ -23,7 +23,6 @@ import type { BlogArticle } from '@/lib/db/schema';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { TableOfContents } from '@/components/blog/table-of-contents';
-import { CommentsSection } from '@/components/blog/comments-section';
 
 export function BlogArticlePage() {
   const { t, i18n } = useTranslation();
@@ -323,14 +322,7 @@ export function BlogArticlePage() {
         </div>
       )}
 
-      {/* Comments Section */}
-      {article?.id && (
-        <div className="container mx-auto px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <CommentsSection articleId={article.id} language={currentLang as 'nl' | 'en'} />
-          </div>
-        </div>
-      )}
+
 
       {/* Back to Blog */}
       <div className="container mx-auto px-4 pb-12">
