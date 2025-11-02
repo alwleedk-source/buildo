@@ -233,11 +233,16 @@ async function seed() {
     // 11. Footer Settings
     console.log('🦶 Adding Footer settings...');
     await db.insert(footerSettings).values({
+      companyDescriptionNl: 'BouwMeesters Amsterdam is uw betrouwbare partner voor hoogwaardige bouwprojecten.',
+      companyDescriptionEn: 'BouwMeesters Amsterdam is your reliable partner for high-quality construction projects.',
       copyrightText: '© 2024 BouwMeesters Amsterdam BV. Alle rechten voorbehouden.',
-      showSocialLinks: true,
+      showSocialMedia: true,
       showNewsletter: true,
-      newsletterTitle: 'Blijf op de hoogte',
-      newsletterDescription: 'Ontvang onze nieuwsbrief met de laatste projecten en nieuws',
+      showServices: true,
+      newsletterTitleNl: 'Blijf op de hoogte',
+      newsletterTitleEn: 'Stay informed',
+      newsletterDescriptionNl: 'Ontvang onze nieuwsbrief met de laatste projecten en nieuws',
+      newsletterDescriptionEn: 'Receive our newsletter with the latest projects and news',
     });
 
     console.log('✅ Database seeding completed successfully!');
