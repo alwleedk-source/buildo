@@ -34,7 +34,13 @@ interface BlogArticle {
   isFeatured: boolean;
 }
 
-export default function EditBlogPage({ params }: { params: { id: string } }) {
+export default async function EditBlogPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  
+  return <EditBlogPageClient id={id} />;
+}
+
+function EditBlogPageClient({ id }: { id: string }) {
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
@@ -43,11 +49,11 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchArticle();
-  }, [params.id]);
+  }, [id]);
 
   const fetchArticle = async () => {
     try {
-      const response = await fetch(`/api/admin/blog/${params.id}`);
+      const response = await fetch(`/api/admin/blog/${id}`);
       if (!response.ok) throw new Error('Failed to fetch article');
       const data = await response.json();
       setArticle(data.article);
