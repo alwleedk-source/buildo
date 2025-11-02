@@ -43,16 +43,20 @@ async function seed() {
     await db.insert(aboutContent).values({
       titleNl: 'Over BouwMeesters Amsterdam',
       titleEn: 'About BouwMeesters Amsterdam',
-      subtitleNl: 'Meer dan 20 jaar ervaring in de bouw',
-      subtitleEn: 'More than 20 years of construction experience',
-      descriptionNl: 'BouwMeesters Amsterdam is een toonaangevend bouwbedrijf gespecialiseerd in residentiële en commerciële projecten. Met meer dan twee decennia aan ervaring leveren wij hoogwaardige bouwoplossingen die voldoen aan de hoogste normen van kwaliteit en duurzaamheid.',
-      descriptionEn: 'BouwMeesters Amsterdam is a leading construction company specializing in residential and commercial projects. With more than two decades of experience, we deliver high-quality construction solutions that meet the highest standards of quality and sustainability.',
-      missionNl: 'Onze missie is om duurzame en innovatieve bouwoplossingen te leveren die de verwachtingen van onze klanten overtreffen.',
-      missionEn: 'Our mission is to deliver sustainable and innovative construction solutions that exceed our clients\' expectations.',
-      visionNl: 'Wij streven ernaar de meest vertrouwde bouwpartner in Amsterdam te zijn.',
-      visionEn: 'We strive to be the most trusted construction partner in Amsterdam.',
-      valuesNl: 'Kwaliteit, Integriteit, Innovatie, Duurzaamheid',
-      valuesEn: 'Quality, Integrity, Innovation, Sustainability',
+      descriptionNl: 'BouwMeesters Amsterdam is een toonaangevend bouwbedrijf gespecialiseerd in residentiële en commerciële projecten. Met meer dan twee decennia aan ervaring leveren wij hoogwaardige bouwoplossingen die voldoen aan de hoogste normen van kwaliteit en duurzaamheid. Onze missie is om duurzame en innovatieve bouwoplossingen te leveren die de verwachtingen van onze klanten overtreffen.',
+      descriptionEn: 'BouwMeesters Amsterdam is a leading construction company specializing in residential and commercial projects. With more than two decades of experience, we deliver high-quality construction solutions that meet the highest standards of quality and sustainability. Our mission is to deliver sustainable and innovative construction solutions that exceed our clients\' expectations.',
+      featuresNl: [
+        { title: 'Kwaliteit', description: 'Hoogwaardige bouwoplossingen' },
+        { title: 'Integriteit', description: 'Eerlijk en transparant' },
+        { title: 'Innovatie', description: 'Moderne bouwtechnieken' },
+        { title: 'Duurzaamheid', description: 'Milieuvriendelijk bouwen' }
+      ],
+      featuresEn: [
+        { title: 'Quality', description: 'High-quality construction solutions' },
+        { title: 'Integrity', description: 'Honest and transparent' },
+        { title: 'Innovation', description: 'Modern construction techniques' },
+        { title: 'Sustainability', description: 'Environmentally friendly construction' }
+      ],
     });
 
     // 3. Statistics
