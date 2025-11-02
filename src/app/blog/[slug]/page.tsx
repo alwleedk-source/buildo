@@ -50,6 +50,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         description: description,
         images: image ? [image] : [],
       },
+      // Add preconnect for external images
+      other: image && image.includes('unsplash.com') ? {
+        'link': '<https://images.unsplash.com>; rel=preconnect; crossorigin',
+      } : undefined,
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
@@ -61,5 +65,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  return <BlogArticlePage />;
+  const { slug } = await params;
+  
+  // Fetch article for preload
+  const [article] = await db
+    .select()
+    .from(blogArticles)
+    .where(or(eq(blogArticles.slugNl, slug), eq(blogArticles.slugEn, slug)))
+    .limit(1);
+  
+  return (
+    <>
+      {article?.image && article.image.includes('unsplash.com') && (
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+      )}
+      <BlogArticlePage />
+    </>
+  );
 }
