@@ -199,11 +199,14 @@ export function HeroSection() {
       }
     } else if (content.backgroundImage) {
       return (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${content.backgroundImage})` }}
-          data-testid="hero-background-image"
-        />
+        <>
+          <link rel="preload" as="image" href={content.backgroundImage} fetchPriority="high" />
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${content.backgroundImage})` }}
+            data-testid="hero-background-image"
+          />
+        </>
       );
     } else {
       return (
