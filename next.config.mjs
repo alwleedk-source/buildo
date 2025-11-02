@@ -96,6 +96,16 @@ const nextConfig = {
           },
         ],
       },
+      // Cache CSS files
+      {
+        source: '/_next/static/css/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
     ];
   },
 };
