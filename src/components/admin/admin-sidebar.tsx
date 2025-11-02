@@ -26,7 +26,8 @@ import {
   Shield,
   Archive,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Palette
 } from "lucide-react";
 
 interface SidebarItem {
@@ -104,6 +105,7 @@ const sidebarData: SidebarItem[] = [
     title: "Instellingen",
     icon: Settings,
     children: [
+      { id: "theme-settings", title: "Theme Instellingen", icon: Palette, path: "/admin/settings/theme" },
       { id: "general-settings", title: "Algemene Instellingen", icon: Settings, path: "/admin/settings/general" },
       { id: "company-details", title: "Bedrijfsgegevens", icon: Building, path: "/admin/settings/company" },
       { id: "contact-settings", title: "Contact Instellingen", icon: Mail, path: "/admin/settings/contact" },
