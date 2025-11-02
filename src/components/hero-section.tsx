@@ -199,9 +199,11 @@ export function HeroSection() {
       }
     } else if (content.backgroundImage) {
       return (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${content.backgroundImage})` }}
+        <img
+          src={content.backgroundImage}
+          alt={title || "Hero background"}
+          className="absolute inset-0 w-full h-full object-cover"
+          fetchPriority="high"
           data-testid="hero-background-image"
         />
       );
