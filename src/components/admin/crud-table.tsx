@@ -32,6 +32,8 @@ interface Field {
   required?: boolean;
   readonly?: boolean;
   options?: string[];
+  placeholder?: string;
+  help?: string;
 }
 
 interface CRUDTableProps {
