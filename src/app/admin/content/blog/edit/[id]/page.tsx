@@ -73,25 +73,40 @@ function EditBlogPageClient({ id }: { id: string }) {
     
     setSaving(true);
     try {
+      console.log('Saving article:', article);
+      
       const response = await fetch('/api/admin/blog', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(article)
       });
 
-      if (!response.ok) throw new Error('Failed to save');
+      console.log('Response status:', response.status);
+      
+      const data = await response.json();
+      console.log('Response data:', data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save');
+      }
 
       toast({
         title: 'Success',
-        description: 'Article saved successfully'
+        description: 'Article saved successfully',
+        duration: 3000,
       });
 
-      router.push('/admin/content/blog');
-    } catch (error) {
+      // Wait a bit before redirecting so user sees the toast
+      setTimeout(() => {
+        router.push('/admin/content/blog');
+      }, 1000);
+    } catch (error: any) {
+      console.error('Save error:', error);
       toast({
         title: 'Error',
-        description: 'Failed to save article',
-        variant: 'destructive'
+        description: error.message || 'Failed to save article',
+        variant: 'destructive',
+        duration: 5000,
       });
     } finally {
       setSaving(false);
