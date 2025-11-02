@@ -63,6 +63,7 @@ const templateTypes = [
   { value: "custom", label: "Aangepaste template" }
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface EmailTemplatesProps {}
 
 export function EmailTemplates({}: EmailTemplatesProps) {

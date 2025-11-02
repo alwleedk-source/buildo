@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 import type { EmailLog } from '@/lib/db/schema';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface EmailLogsProps {}
 
 export function EmailLogs({}: EmailLogsProps) {

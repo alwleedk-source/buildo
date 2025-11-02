@@ -35,6 +35,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Settings, Edit, Save, X, Check } from "lucide-react";
 import type { EmailSetting, InsertEmailSetting } from '@/lib/db/schema';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface EmailSettingsProps {}
 
 export function EmailSettings({}: EmailSettingsProps) {
