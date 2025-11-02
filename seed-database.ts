@@ -197,14 +197,14 @@ async function seed() {
     // 8. Company Details
     console.log('🏢 Adding Company details...');
     await db.insert(companyDetails).values({
-      companyName: 'BouwMeesters Amsterdam BV',
-      legalName: 'BouwMeesters Amsterdam BV',
+      companyNameNl: 'BouwMeesters Amsterdam BV',
+      companyNameEn: 'BouwMeesters Amsterdam BV',
       kvkNumber: '12345678',
       btwNumber: 'NL123456789B01',
-      addressStreet: 'Bouwstraat 123',
-      addressCity: 'Amsterdam',
-      addressPostalCode: '1012 AB',
-      addressCountry: 'Nederland',
+      address: 'Bouwstraat 123',
+      city: 'Amsterdam',
+      postalCode: '1012 AB',
+      country: 'Nederland',
       phone: '+31 20 123 4567',
       email: 'info@bouwmeesters.nl',
       website: 'https://bouwmeesters.nl',
