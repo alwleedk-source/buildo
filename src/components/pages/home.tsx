@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/header';
 import { HeroSection } from '@/components/hero-section';
 import { StatisticsSection } from '@/components/statistics-section';
@@ -18,8 +19,23 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { SectionSetting } from '@/lib/db/schema';
 
-export function HomePage() {
-  const { t, i18n } = useTranslation();
+export function Home() {
+  const { t } = useTranslation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check authentication status
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/session');
+        const data = await response.json();
+        setIsAuthenticated(data.authenticated);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+    checkAuth();
+  }, []);
   const { data: sectionSettings = [], isLoading } = useQuery<SectionSetting[]>({
     queryKey: ['/api/section-settings'],
   });
@@ -139,14 +155,17 @@ export function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="fixed bottom-6 right-6 z-50">
-        <Link href="/admin" data-testid="link-admin">
-          <Button size="lg" className="shadow-lg" data-testid="button-admin-access">
-            <Settings className="w-5 h-5 mr-2" />
-            Admin
-          </Button>
-        </Link>
-      </div>
+      {/* Only show admin button if authenticated */}
+      {isAuthenticated && (
+        <div className="fixed bottom-6 right-6 z-50">
+          <Link href="/admin" data-testid="link-admin">
+            <Button size="lg" className="shadow-lg" data-testid="button-admin-access">
+              <Settings className="w-5 h-5 mr-2" />
+              Admin
+            </Button>
+          </Link>
+        </div>
+      )}
       {isLoading ? (
         // Show full-screen loading to prevent any section from appearing
         <main className="min-h-screen flex items-center justify-center">
