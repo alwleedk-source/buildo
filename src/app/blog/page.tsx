@@ -9,12 +9,13 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 interface PageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     category?: string;
     tag?: string;
-  };
+  }>;
 }
 
-export default function Page({ searchParams }: PageProps) {
-  return <BlogPageServer searchParams={searchParams} />;
+export default async function Page({ searchParams }: PageProps) {
+  const params = await searchParams;
+  return <BlogPageServer searchParams={params} />;
 }
