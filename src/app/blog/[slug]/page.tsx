@@ -4,7 +4,7 @@ import { db } from '@/lib/db';
 import { blogArticles } from '@/lib/db/schema';
 import { eq, or } from 'drizzle-orm';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Revalidate every hour
 
 interface PageProps {
   params: Promise<{ slug: string }>;

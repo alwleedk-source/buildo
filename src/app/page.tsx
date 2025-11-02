@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Home - BouwMeesters Amsterdam page',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300; // Revalidate every 5 minutes
 
 export default function Page() {
   return <HomePage />;

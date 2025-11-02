@@ -32,6 +32,10 @@ const nextConfig = {
   // Enable compression
   compress: true,
   
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+  
   // ESLint configuration
   eslint: {
     ignoreDuringBuilds: true,
@@ -45,7 +49,18 @@ const nextConfig = {
   // Experimental features
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: [
+      'lucide-react',
+      '@tanstack/react-query',
+      'react-i18next',
+    ],
+  },
+  
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
   },
   
   // Headers for caching and performance
@@ -64,6 +79,16 @@ const nextConfig = {
       // Cache Next.js static files
       {
         source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache JavaScript chunks
+      {
+        source: '/_next/static/chunks/:path*',
         headers: [
           {
             key: 'Cache-Control',
