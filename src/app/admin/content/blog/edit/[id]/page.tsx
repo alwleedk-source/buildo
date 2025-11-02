@@ -75,10 +75,21 @@ function EditBlogPageClient({ id }: { id: string }) {
     try {
       console.log('Saving article:', article);
       
+      // Prepare article data with proper date handling
+      const articleToSave = {
+        ...article,
+        // Convert date strings back to Date objects for API
+        publishedAt: article.publishedAt ? new Date(article.publishedAt) : null,
+        createdAt: article.createdAt ? new Date(article.createdAt) : null,
+        updatedAt: new Date(),
+      };
+      
+      console.log('Article to save:', articleToSave);
+      
       const response = await fetch('/api/admin/blog', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(article)
+        body: JSON.stringify(articleToSave)
       });
 
       console.log('Response status:', response.status);
