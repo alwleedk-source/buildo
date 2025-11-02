@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { contactFormSettings } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 // import { requireAuth } from '@/lib/auth'; // Disabled for now
 
 export async function GET(request: NextRequest) {
