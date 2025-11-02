@@ -16,12 +16,12 @@ import {
 import { 
   Eye, 
   Edit, 
-  Trash2, 
   ExternalLink,
   Star,
   CheckCircle,
   Clock
 } from 'lucide-react';
+import { DeleteButton } from './delete-button';
 
 export async function BlogListServer() {
   // Fetch all articles from database
@@ -134,16 +134,10 @@ export async function BlogListServer() {
                             <Edit className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <form action={`/api/admin/blog?id=${article.id}`} method="DELETE">
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            type="submit"
-                            className="text-destructive hover:text-destructive"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </form>
+                        <DeleteButton 
+                          articleId={article.id}
+                          articleTitle={article.titleNl || article.titleEn || 'Untitled'}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
