@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:migrate": "node scripts/run-migration.js"
+    "db:migrate": "node scripts/run-migration.js",
+    "db:migrate:002": "node scripts/run-migration-002.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
