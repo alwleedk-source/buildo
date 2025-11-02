@@ -32,6 +32,27 @@ interface BlogArticle {
   title: string;
 }
 
+// CommentsList component - moved outside to avoid creating during render
+const CommentsList = ({ comments, emptyMessage, CommentCard }: { 
+  comments: BlogComment[]; 
+  emptyMessage: string;
+  CommentCard: React.ComponentType<{ comment: BlogComment }>;
+}) => (
+  <div className="space-y-4">
+    {comments.length === 0 ? (
+      <p className="text-muted-foreground text-center py-8" data-testid="no-comments">
+        {emptyMessage}
+      </p>
+    ) : (
+      <div className="space-y-4">
+        {comments.map((comment) => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))}
+      </div>
+    )}
+  </div>
+);
+
 export function CommentsManager() {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -243,21 +264,7 @@ export function CommentsManager() {
     </Card>
   );
 
-  const CommentsList = ({ comments, emptyMessage }: { comments: BlogComment[]; emptyMessage: string }) => (
-    <div className="space-y-4">
-      {comments.length === 0 ? (
-        <p className="text-muted-foreground text-center py-8" data-testid="no-comments">
-          {emptyMessage}
-        </p>
-      ) : (
-        <div className="space-y-4">
-          {comments.map((comment) => (
-            <CommentCard key={comment.id} comment={comment} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  // CommentsList moved outside component
 
   return (
     <div className="space-y-6" data-testid="comments-manager">
@@ -302,6 +309,7 @@ export function CommentsManager() {
           <CommentsList 
             comments={pendingComments} 
             emptyMessage={t('comments.noPending', 'No pending comments')}
+            CommentCard={CommentCard}
           />
         </TabsContent>
 
@@ -309,6 +317,7 @@ export function CommentsManager() {
           <CommentsList 
             comments={approvedComments} 
             emptyMessage={t('comments.noApproved', 'No approved comments')}
+            CommentCard={CommentCard}
           />
         </TabsContent>
 
@@ -316,6 +325,7 @@ export function CommentsManager() {
           <CommentsList 
             comments={rejectedComments} 
             emptyMessage={t('comments.noRejected', 'No rejected comments')}
+            CommentCard={CommentCard}
           />
         </TabsContent>
 
@@ -323,6 +333,7 @@ export function CommentsManager() {
           <CommentsList 
             comments={spamComments} 
             emptyMessage={t('comments.noSpam', 'No spam comments')}
+            CommentCard={CommentCard}
           />
         </TabsContent>
       </Tabs>
