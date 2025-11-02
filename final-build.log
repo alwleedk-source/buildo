@@ -1,0 +1,14 @@
+
+> buildo-nextjs@0.1.0 build /home/ubuntu/buildo
+> next build
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.9s
+   Skipping linting
+   Checking validity of types ...
+ ELIFECYCLE  Command failed with exit code 1.

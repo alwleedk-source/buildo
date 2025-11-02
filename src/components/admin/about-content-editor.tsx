@@ -44,10 +44,6 @@ export function AboutContentEditor() {
   });
 
   const form = useForm<AboutFormData>({
-    resolver: zodResolver(insertAboutContentSchema.extend({
-      featuresNl: insertAboutContentSchema.shape.featuresNl.optional(),
-      featuresEn: insertAboutContentSchema.shape.featuresEn.optional(),
-    })),
     defaultValues: {
       titleNl: "",
       titleEn: "",

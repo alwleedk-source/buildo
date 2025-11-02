@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
       .select()
       .from(blogArticles)
       .where(eq(blogArticles.isPublished, true))
-      .orderBy(desc(blogArticles.views), desc(blogArticles.publishedAt))
+      .orderBy(desc(blogArticles.viewCount), desc(blogArticles.publishedAt))
       .limit(limit);
 
     return NextResponse.json({

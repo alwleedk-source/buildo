@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Return optimized image
-    return new NextResponse(optimizedBuffer, {
+    return new NextResponse(new Uint8Array(optimizedBuffer), {
       headers: {
         'Content-Type': `image/${format || 'webp'}`,
         'Cache-Control': 'public, max-age=31536000, immutable',

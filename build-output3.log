@@ -1,0 +1,27 @@
+
+> buildo-nextjs@0.1.0 build /home/ubuntu/buildo
+> next build
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.4s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/app/api/blog/popular/route.ts:15:34
+Type error: Property 'views' does not exist on type 'PgTableWithColumns<{ name: "blog_articles"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "blog_articles"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 29 more ...; updatedAt: PgColumn<...'.
+
+[0m [90m 13 |[39m       [33m.[39m[36mfrom[39m(blogArticles)
+ [90m 14 |[39m       [33m.[39mwhere(eq(blogArticles[33m.[39misPublished[33m,[39m [36mtrue[39m))
+[31m[1m>[22m[39m[90m 15 |[39m       [33m.[39morderBy(desc(blogArticles[33m.[39mviews)[33m,[39m desc(blogArticles[33m.[39mpublishedAt))
+ [90m    |[39m                                  [31m[1m^[22m[39m
+ [90m 16 |[39m       [33m.[39mlimit(limit)[33m;[39m
+ [90m 17 |[39m
+ [90m 18 |[39m     [36mreturn[39m [33mNextResponse[39m[33m.[39mjson({[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

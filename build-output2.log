@@ -1,0 +1,31 @@
+
+> buildo-nextjs@0.1.0 build /home/ubuntu/buildo
+> next build
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.2s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/app/api/blog/comments/route.ts:70:8
+Type error: No overload matches this call.
+  Overload 1 of 2, '(value: { articleId: string | SQL<unknown> | Placeholder<string, any>; authorName: string | SQL<unknown> | Placeholder<string, any>; authorEmail: string | SQL<...> | Placeholder<...>; ... 6 more ...; parentId?: string | ... 3 more ... | undefined; }): PgInsertBase<...>', gave the following error.
+    Object literal may only specify known properties, and 'name' does not exist in type '{ articleId: string | SQL<unknown> | Placeholder<string, any>; authorName: string | SQL<unknown> | Placeholder<string, any>; authorEmail: string | SQL<...> | Placeholder<...>; ... 6 more ...; parentId?: string | ... 3 more ... | undefined; }'.
+  Overload 2 of 2, '(values: { articleId: string | SQL<unknown> | Placeholder<string, any>; authorName: string | SQL<unknown> | Placeholder<string, any>; authorEmail: string | SQL<...> | Placeholder<...>; ... 6 more ...; parentId?: string | ... 3 more ... | undefined; }[]): PgInsertBase<...>', gave the following error.
+    Object literal may only specify known properties, and 'articleId' does not exist in type '{ articleId: string | SQL<unknown> | Placeholder<string, any>; authorName: string | SQL<unknown> | Placeholder<string, any>; authorEmail: string | SQL<...> | Placeholder<...>; ... 6 more ...; parentId?: string | ... 3 more ... | undefined; }[]'.
+
+[0m [90m 68 |[39m     [36mconst[39m [newComment] [33m=[39m [36mawait[39m db
+ [90m 69 |[39m       [33m.[39minsert(blogComments)
+[31m[1m>[22m[39m[90m 70 |[39m       [33m.[39mvalues({
+ [90m    |[39m        [31m[1m^[22m[39m
+ [90m 71 |[39m         articleId[33m,[39m
+ [90m 72 |[39m         name[33m,[39m
+ [90m 73 |[39m         email[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

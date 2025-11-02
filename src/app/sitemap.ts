@@ -50,11 +50,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await db
     .select()
     .from(blogArticles)
-    .where(eq(blogArticles.published, true));
+    .where(eq(blogArticles.isPublished, true));
 
   const blogPages = articles.map(article => ({
     url: `${BASE_URL}/blog/${article.slugNl}`,
-    lastModified: article.updatedAt || article.createdAt,
+    lastModified: article.updatedAt || article.createdAt || new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
@@ -63,7 +63,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const servicesList = await db.select().from(services);
   const servicesPages = servicesList.map(service => ({
     url: `${BASE_URL}/services/${service.id}`,
-    lastModified: service.updatedAt || service.createdAt,
+    lastModified: service.updatedAt || service.createdAt || new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
@@ -72,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projectsList = await db.select().from(projects);
   const projectsPages = projectsList.map(project => ({
     url: `${BASE_URL}/projects/${project.id}`,
-    lastModified: project.updatedAt || project.createdAt,
+    lastModified: project.updatedAt || project.createdAt || new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));

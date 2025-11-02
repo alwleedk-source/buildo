@@ -1,0 +1,27 @@
+
+> buildo-nextjs@0.1.0 build /home/ubuntu/buildo
+> next build
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 34.4s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/app/api/blog/comments/route.ts:26:27
+Type error: Property 'isApproved' does not exist on type 'PgTableWithColumns<{ name: "blog_comments"; schema: undefined; columns: { id: PgColumn<{ name: "id"; tableName: "blog_comments"; dataType: "string"; columnType: "PgVarchar"; data: string; driverParam: string; notNull: true; ... 7 more ...; generated: undefined; }, {}, { ...; }>; ... 8 more ...; updatedAt: PgColumn<....'.
+
+[0m [90m 24 |[39m         and(
+ [90m 25 |[39m           eq(blogComments[33m.[39marticleId[33m,[39m articleId)[33m,[39m
+[31m[1m>[22m[39m[90m 26 |[39m           eq(blogComments[33m.[39misApproved[33m,[39m [36mtrue[39m)
+ [90m    |[39m                           [31m[1m^[22m[39m
+ [90m 27 |[39m         )
+ [90m 28 |[39m       )
+ [90m 29 |[39m       [33m.[39morderBy(desc(blogComments[33m.[39mcreatedAt))[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

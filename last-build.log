@@ -1,0 +1,28 @@
+
+> buildo-nextjs@0.1.0 build /home/ubuntu/buildo
+> next build
+
+   ▲ Next.js 15.5.6
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 25.1s
+   Skipping linting
+   Checking validity of types ...
+Failed to compile.
+
+./src/app/api/image-proxy/route.ts:60:29
+Type error: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'BodyInit | null | undefined'.
+  Type 'Buffer<ArrayBufferLike>' is missing the following properties from type 'URLSearchParams': size, append, delete, get, and 2 more.
+
+[0m [90m 58 |[39m
+ [90m 59 |[39m     [90m// Return optimized image[39m
+[31m[1m>[22m[39m[90m 60 |[39m     [36mreturn[39m [36mnew[39m [33mNextResponse[39m(optimizedBuffer[33m,[39m {
+ [90m    |[39m                             [31m[1m^[22m[39m
+ [90m 61 |[39m       headers[33m:[39m {
+ [90m 62 |[39m         [32m'Content-Type'[39m[33m:[39m [32m`image/${format || 'webp'}`[39m[33m,[39m
+ [90m 63 |[39m         [32m'Cache-Control'[39m[33m:[39m [32m'public, max-age=31536000, immutable'[39m[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+ ELIFECYCLE  Command failed with exit code 1.

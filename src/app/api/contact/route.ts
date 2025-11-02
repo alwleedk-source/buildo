@@ -24,15 +24,11 @@ export async function POST(request: NextRequest) {
         firstName,
         lastName,
         email,
-        phone: body.phone || null,
-        company: body.company || null,
-        subject: body.subject || 'General Inquiry',
+        phone: body.phone || '',
+        company: body.company || '',
         message,
-        projectType: body.projectType || null,
-        budget: body.budget || null,
-        timeline: body.timeline || null,
-        status: 'new',
-        isRead: false
+        projectType: body.projectType || '',
+        status: 'new'
       })
       .returning();
 

@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       .where(
         and(
           eq(blogComments.articleId, articleId),
-          eq(blogComments.isApproved, true)
+          eq(blogComments.status, 'approved')
         )
       )
       .orderBy(desc(blogComments.createdAt));
@@ -69,10 +69,10 @@ export async function POST(request: NextRequest) {
       .insert(blogComments)
       .values({
         articleId,
-        name,
-        email,
-        comment,
-        isApproved: false // Requires admin approval
+        authorName: name,
+        authorEmail: email,
+        content: comment,
+        status: 'pending' // Requires admin approval
       })
       .returning();
 
