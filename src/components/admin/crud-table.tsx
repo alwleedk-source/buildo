@@ -28,7 +28,7 @@ import { toast } from 'sonner';
 interface Field {
   name: string;
   label: string;
-  type: 'text' | 'textarea' | 'number' | 'url' | 'email' | 'checkbox' | 'datetime' | 'select';
+  type: 'text' | 'textarea' | 'number' | 'url' | 'email' | 'checkbox' | 'datetime' | 'date' | 'select';
   required?: boolean;
   readonly?: boolean;
   options?: string[];
