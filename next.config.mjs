@@ -34,28 +34,36 @@ const nextConfig = {
   
   // ESLint configuration
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
   
   // TypeScript configuration
   typescript: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has type errors.
     ignoreBuildErrors: true,
   },
   
   // Experimental features
   experimental: {
     optimizeCss: true,
+    optimizePackageImports: ['lucide-react'],
   },
   
-  // Headers for caching
+  // Headers for caching and performance
   async headers() {
     return [
+      // Cache static assets
       {
-        source: '/:all*(svg|jpg|jpeg|png|gif|webp|avif)',
+        source: '/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico|woff|woff2)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Cache Next.js static files
+      {
+        source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',

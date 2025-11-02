@@ -19,7 +19,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Simple performance optimizations */
+/* Critical CSS for LCP optimization */
+h1 {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Performance optimizations */
 img {
   content-visibility: auto;
 }
@@ -37,5 +47,12 @@ html {
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimize font rendering for LCP */
+@supports (font-display: swap) {
+  * {
+    font-display: swap;
   }
 }
