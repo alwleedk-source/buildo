@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { ImageUpload } from '@/components/admin/image-upload';
 
 interface BlogArticle {
   id: string;
@@ -304,31 +305,20 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
               <CardTitle>Featured Image</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <Label>Image URL</Label>
-                <Input
-                  value={article.image}
-                  onChange={(e) => updateField('image', e.target.value)}
-                  placeholder="https://example.com/image.jpg"
-                />
-              </div>
+              <ImageUpload
+                value={article.image}
+                onChange={(url) => updateField('image', url)}
+                label="Featured Image"
+                aspectRatio="16/9"
+              />
               <div>
                 <Label>Image Alt Text</Label>
                 <Input
                   value={article.imageAlt}
                   onChange={(e) => updateField('imageAlt', e.target.value)}
+                  placeholder="Description of the image"
                 />
               </div>
-              {article.image && (
-                <div>
-                  <Label>Preview</Label>
-                  <img
-                    src={article.image}
-                    alt={article.imageAlt}
-                    className="mt-2 max-w-md rounded-lg border"
-                  />
-                </div>
-              )}
             </CardContent>
           </Card>
         </div>
