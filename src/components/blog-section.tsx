@@ -148,7 +148,7 @@ export function BlogSection() {
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayArticles.map((article) => (
+          {displayArticles.map((article, index) => (
             <article
               key={article.id}
               className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
