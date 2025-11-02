@@ -35,9 +35,14 @@ export function HomePage() {
     const checkAuth = async () => {
       try {
         const response = await fetch('/api/auth/session');
+        if (!response.ok) {
+          setIsAuthenticated(false);
+          return;
+        }
         const data = await response.json();
-        setIsAuthenticated(data.authenticated);
+        setIsAuthenticated(data.authenticated || false);
       } catch (error) {
+        console.error('Auth check error:', error);
         setIsAuthenticated(false);
       }
     };
