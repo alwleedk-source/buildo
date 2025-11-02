@@ -213,9 +213,9 @@ async function seed() {
     // 9. Site Settings
     console.log('⚙️ Adding Site settings...');
     await db.insert(siteSettings).values([
-      { key: 'site_name', value: 'BouwMeesters Amsterdam', category: 'general' },
-      { key: 'site_tagline', value: 'Uw Partner in Bouw', category: 'general' },
-      { key: 'logo_url', value: '/logo.png', category: 'branding' },
+      { key: 'site_name', value: 'BouwMeesters Amsterdam', type: 'text' },
+      { key: 'site_tagline', value: 'Uw Partner in Bouw', type: 'text' },
+      { key: 'logo_url', value: '/logo.png', type: 'text' },
     ]);
 
     // 10. Section Settings
