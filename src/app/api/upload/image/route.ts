@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 import sharp from 'sharp';
+import { uploadToR2, generateFilename } from '@/lib/r2';
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,61 +22,63 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
       return NextResponse.json(
-        { error: 'File size must be less than 5MB' },
+        { error: 'File size must be less than 10MB' },
         { status: 400 }
       );
     }
+
+    console.log('Processing image:', file.name, file.size, 'bytes');
 
     // Convert file to buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads', 'blog');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
     // Generate unique filename
-    const timestamp = Date.now();
-    const originalName = file.name.replace(/\s+/g, '-').toLowerCase();
-    const nameWithoutExt = originalName.substring(0, originalName.lastIndexOf('.'));
-    const filename = `${nameWithoutExt}-${timestamp}.webp`;
-    const filepath = join(uploadsDir, filename);
+    const filename = generateFilename(file.name);
+    const thumbnailFilename = generateFilename(file.name, 'webp').replace('.webp', '-thumb.webp');
 
-    // Optimize and convert image to WebP using Sharp
-    await sharp(buffer)
-      .resize(1200, 800, {
+    console.log('Generated filenames:', { filename, thumbnailFilename });
+
+    // Optimize and convert main image to WebP
+    const optimizedBuffer = await sharp(buffer)
+      .resize(1920, 1280, {
         fit: 'inside',
         withoutEnlargement: true
       })
       .webp({ quality: 85 })
-      .toFile(filepath);
+      .toBuffer();
+
+    console.log('Optimized image size:', optimizedBuffer.length, 'bytes');
 
     // Create thumbnail
-    const thumbnailFilename = `${nameWithoutExt}-${timestamp}-thumb.webp`;
-    const thumbnailPath = join(uploadsDir, thumbnailFilename);
-    
-    await sharp(buffer)
+    const thumbnailBuffer = await sharp(buffer)
       .resize(400, 300, {
         fit: 'cover'
       })
       .webp({ quality: 80 })
-      .toFile(thumbnailPath);
+      .toBuffer();
 
-    // Return public URL
-    const imageUrl = `/uploads/blog/${filename}`;
-    const thumbnailUrl = `/uploads/blog/${thumbnailFilename}`;
+    console.log('Thumbnail size:', thumbnailBuffer.length, 'bytes');
 
+    // Upload to R2
+    console.log('Uploading to R2...');
+    const imageUrl = await uploadToR2(optimizedBuffer, filename, 'image/webp');
+    const thumbnailUrl = await uploadToR2(thumbnailBuffer, thumbnailFilename, 'image/webp');
+
+    console.log('Upload successful:', { imageUrl, thumbnailUrl });
+
+    // Return public URLs
     return NextResponse.json({
       success: true,
       url: imageUrl,
       thumbnailUrl,
       filename,
-      size: file.size,
+      originalSize: file.size,
+      optimizedSize: optimizedBuffer.length,
+      compression: Math.round((1 - optimizedBuffer.length / file.size) * 100),
       type: 'image/webp'
     });
 
