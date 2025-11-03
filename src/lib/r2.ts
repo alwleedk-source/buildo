@@ -17,7 +17,7 @@ export async function uploadToR2(
   contentType: string = 'image/webp'
 ): Promise<string> {
   const bucketName = process.env.R2_BUCKET_NAME!;
-  const accountId = process.env.R2_ACCOUNT_ID!;
+  const publicBaseUrl = process.env.R2_PUBLIC_URL!;
 
   try {
     const command = new PutObjectCommand({
@@ -30,10 +30,9 @@ export async function uploadToR2(
 
     await r2Client.send(command);
 
-    // Return public URL
-    // Format: https://pub-{accountId}.r2.dev/{filename}
-    const publicUrl = `https://pub-${accountId}.r2.dev/${filename}`;
-    
+    // Return public URL using R2_PUBLIC_URL environment variable
+    const publicUrl = `${publicBaseUrl}/${filename}`;
+
     return publicUrl;
   } catch (error) {
     console.error('R2 upload error:', error);
